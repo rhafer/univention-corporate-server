@@ -234,11 +234,6 @@ class object(univention.admin.handlers.simpleComputer, nagios.Support):
 		self.nagios_cleanup()
 		univention.admin.handlers.simpleComputer.cleanup(self)
 
-	def cancel(self):
-		for key, value in self.alloc:
-			univention.debug.debug(univention.debug.ADMIN, univention.debug.WARN, 'cancel: release (%s): %s' % (key, value))
-			univention.admin.allocators.release(self.lo, self.position, key, value)
-
 
 def rewrite(filter, mapping):
 	if filter.variable == 'ip':
