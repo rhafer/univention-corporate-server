@@ -1,9 +1,8 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2008-2020 Univention GmbH
+# Copyright (C) 2008-2019 Univention GmbH
 #
-# https://www.univention.de/
+# http://www.univention.de/
 #
 # All rights reserved.
 #
@@ -26,4 +25,5 @@
 # You should have received a copy of the GNU Affero General Public
 # License with the Debian GNU/Linux or Univention distribution in file
 # /usr/share/common-licenses/AGPL-3; if not, see
-# <https://www.gnu.org/licenses/>.
+# <http://www.gnu.org/licenses/>.
+__path__ = __import__('pkgutil').extend_path(__path__, __name__)
