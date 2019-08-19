@@ -195,6 +195,7 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 		'compat',  # dh
 		'control',
 		'copyright',  # dh_installdocs default
+		'debhelper-build-stamp',  # dh
 		'files',  # dh_builddeb
 		'NEWS',  # dh_installchangelogs default
 		'rules',
@@ -242,13 +243,21 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 		'prerm',  # dh_installdeb
 		'prerm.debhelper',  # dh_installdeb
 		'README.Debian',  # dh_installdocs
+		'mount',  # dh_systemd_enable
+		'path',  # dh_systemd_enable
+		'pyinstall',  # dh_python2 dh_python3
+		'service',  # dh_systemd_enable
 		'sgmlcatalogs',  # dh_installcatalogs
 		'sharedmimeinfo',  # dh_installmime
 		'shlibs',  # dh_installdeb
+		'socket',  # dh_systemd_enable
 		'substvars',  # dh_gencontrol
 		'symbols',  # dh_makeshlibs
 		'symbols.i386',  # dh_makeshlibs
+		'target',  # dh_systemd_enable
 		'templates',  # dh_installdebconf
+		'timer',  # dh_systemd_enable
+		'tmpfile',  # dh_systemd_enable
 		'TODO',  # dh_installdocs
 		'triggers',  # dh_installdeb
 		'umc-modules',  # dh-umc-modules-install
@@ -256,9 +265,9 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 		'univention-config-registry-mapping',  # univention-install-config-registry-info
 		'univention-config-registry',  # univention-install-config-registry
 		'univention-config-registry-variables',  # univention-install-config-registry-info
+		'univention-l10n',  # univention-l10n-build / univention-l10n-install
 		'univention-service',  # univention-install-service-info
 		'wm',  # dh_installwm
-		'univention-l10n',  # univention-l10n-build / univention-l10n-install
 	))
 
 	NAMED_DH_FILES = set((
