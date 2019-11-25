@@ -4920,6 +4920,7 @@ class PortalDefaultLinkTarget(select):
 	choices = [
 		('samewindow', _('Same tab')),
 		('newwindow', _('New tab')),
+		('embedded', _('Embedded')),
 	]
 
 
@@ -4928,6 +4929,7 @@ class PortalEntryLinkTarget(select):
 		('useportaldefault', _('Use default of portal')),
 		('samewindow', _('Same tab')),
 		('newwindow', _('New tab')),
+		('embedded', _('Embedded')),
 	]
 
 
