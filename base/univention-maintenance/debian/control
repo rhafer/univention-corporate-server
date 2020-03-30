@@ -10,12 +10,6 @@ Build-Depends: debhelper,
 Package: univention-maintenance
 Architecture: all
 Depends: ${misc:Depends},
- bc,
- ldap-utils,
- httpd,
- nmap,
- mrtg,
- netcat-traditional,
  univention-mail-postfix | mail-transport-agent,
  cron,
  univention-config,
