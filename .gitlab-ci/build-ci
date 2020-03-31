@@ -1,0 +1,52 @@
+#!/bin/sh
+set -e -u
+
+exec >generated-config.yml
+cat "${0%/*}/base.yml"
+
+for make in doc/*/Makefile
+do
+	[ -f "$make" ] || continue
+	path="${make%/Makefile}"
+	pkg="${path##*/}"
+	echo
+	echo "build ${pkg}:"
+	echo '  variables:'
+	echo "    base: $path"
+	echo '  extends: .doc'
+	echo '  rules:'
+	echo '    - changes:'
+	echo "      - ${path}/**/*"
+done
+
+for cl in */*/debian/changelog
+do
+	[ -f "$cl" ] || continue
+	path="${cl%/debian/changelog}"
+	pkg="${path##*/}"
+
+	case "${path##*/}" in
+		shim) continue ;;  # Depends on scope ucs_3.2-0-uefi-secureboot-tools
+		python-notifier) continue ;;  # Depends on git submodule
+		univention-kvm-compat) continue ;;  # Depends on very old ipxe-qemu not in dist/Packages
+		univention-foomatic-ppds)  continue ;;  # build-time >1h
+	esac
+
+	echo
+	echo "build ${pkg}:"
+	echo '  variables:'
+	echo "    base: $path"
+	echo '  extends: .deb'
+	echo '  rules:'
+	echo '    - changes:'
+	echo "      - ${path}/**/*"
+	# echo '  needs:'
+	# echo "    - job: ${dep}
+done
+
+# The child pipeline needs at minimum one job to run - otherwise the sub-pipeline fails
+echo
+echo 'dummy:'
+echo '  stage: .post'
+echo '  script:'
+echo '    - ":"'

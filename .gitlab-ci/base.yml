@@ -1,0 +1,30 @@
+default:
+  artifacts:
+    expire_in: 1 day
+
+variables:
+  GIT_STRATEGY: fetch
+  GIT_SUBMODULE_STRATEGY: none
+  GIT_DEPTH: "3"
+  DEB: docker-registry.knut.univention.de/phahn/ucs-devbase:444
+  DOC: docker-registry.knut.univention.de/docbook
+
+.deb:
+  image: $DEB
+  before_script:
+    - apt-get -qq update
+    - cd $base
+    - apt-get -qq build-dep .
+  script:
+    - dpkg-buildpackage -uc -us -b --jobs-try=auto
+  artifacts:
+    paths:
+      - "*/*.deb"
+
+.doc:
+  image: $DOC
+  script:
+    - make -C $base install DESTDIR=$CI_PROJECT_DIR/public
+  artifacts:
+    paths:
+      - public
