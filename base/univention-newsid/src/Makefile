@@ -1,17 +1,17 @@
-PROG=		univention-newsid
-OBJS=		memory.o util_pw.o md4.o genrand.o newsid.o
+#!/usr/bin/make -f
 
-BINDIR=		$(SUFFIX)/usr/local/bin
+PROG := univention-newsid
+OBJS := memory.o util_pw.o md4.o genrand.o newsid.o
 
-CC=		gcc
-CFLAGS=		-Wall -O2
+BINDIR := $(DESTDIR)/usr/sbin
+INSTALL ?= install
 
 $(PROG):	$(OBJS)
-	$(CC) $(CFLAGS) -o $(PROG) $(OBJS);
+	$(CC) $(CFLAGS) $(OBJS) -o $(PROG) $(LDFLAGS)
 
-install: 
-	cp $(PROG) $(BINDIR)/$(PROG)
-	chmod 0644 $(BINDIR)/$(PROG)
+install:
+	$(INSTALL) -m 0755 -d $(BINDIR)
+	$(INSTALL) -m 0755 $(PROG) $(BINDIR)/$(PROG)
 
 clean:
-	rm -f $(OBJS) *~
+	$(RM) $(OBJS) $(PROG) *~
