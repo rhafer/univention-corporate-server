@@ -56,8 +56,8 @@ override_dh_auto_install:
 	done
 
 override_dh_fixperms:
-	chmod 755 debian/univention-printserver/etc/univention/templates/scripts/etc/cups/cupsd.conf
 	dh_fixperms
+	chmod 755 debian/univention-printserver/etc/univention/templates/scripts/etc/cups/cupsd.conf
 
 %:
 	dh $@ --with 'python2,python3'
