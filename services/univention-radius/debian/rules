@@ -44,7 +44,6 @@ override_dh_fixperms:
 override_dh_auto_clean:
 	make clean
 	dh_auto_clean
-	rm -f debian/univention-radius.conffiles
 
 override_dh_auto_build:
 	# Build suid wrapper

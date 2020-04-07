@@ -39,10 +39,6 @@ override_dh_auto_install:
 	univention-l10n-install de
 	univention-install-config-registry
 
-override_dh_auto_clean:
-	dh_auto_clean
-	rm -f debian/univention-demo-configuration.conffiles
-
 override_dh_install:
 	dh_install -X*.po
 

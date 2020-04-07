@@ -40,11 +40,6 @@ override_dh_auto_install:
 	univention-install-service-info
 	dh_auto_install
 
-override_dh_auto_clean:
-	$(RM) debian/univention-virtual-machine-manager-node-*{pre,post}{inst,rm}.debhelper
-	$(RM) debian/univention-virtual-machine-manager-node-*.conffiles
-	dh_auto_clean
-
 override_dh_installinit:
 	dh_installinit -punivention-virtual-machine-manager-node-kvm --no-restart-on-upgrade
 	dh_installinit --remaining-packages
