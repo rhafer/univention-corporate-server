@@ -10,7 +10,7 @@ _uniucr () {
 
 	if [ "$COMP_CWORD" -eq 1 ]
 	then
-		COMPREPLY=( $(compgen -W "set get unset commit search filter shell dump --help --version --shell --keys-only" -- "${cur}") )
+		COMPREPLY=( $(compgen -W "set get unset commit search filter shell dump --help --shell --keys-only" -- "${cur}") )
 		return 0
 	fi
 

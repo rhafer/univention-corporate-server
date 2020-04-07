@@ -30,8 +30,6 @@
 # /usr/share/common-licenses/AGPL-3; if not, see
 # <https://www.gnu.org/licenses/>.
 
-version=`dpkg-parsechangelog | grep "Version" | sed -e 's/Version: //'`
-
 PYVERS=$(shell pyversions -vr)
 
 D=${CURDIR}/debian/univention-pkgdb
@@ -48,11 +46,6 @@ override_dh_auto_install:
 	dh_auto_install
 	univention-install-config-registry
 	univention-install-config-registry-info
-
-override_dh_install:
-	dh_install
-	sed -e "s/@%@package_version@%@/${version}/" -i debian/python-univention-pkgdb/usr/lib/python2.7/dist-packages/univention/pkgdb.py
-	sed -e "s/@%@package_version@%@/${version}/" -i debian/python3-univention-pkgdb/usr/lib/python3/dist-packages/univention/pkgdb.py
 
 override_dh_fixperms:
 	dh_fixperms

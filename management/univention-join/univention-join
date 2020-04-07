@@ -86,7 +86,6 @@ display_help() {
 	  -verbose                       Enable verbose logging (/var/log/univention/join.log)
 
 	  -h | --help | -?:              Print this usage message and exit program
-	  --version:                     Print version information and exit program
 
 	Description:
 	  univention-join joins a computer to an ucs domain,
@@ -97,12 +96,8 @@ display_help() {
 
 display_header() {
 	echo "univention-join: joins a computer to an ucs domain"
-	echo "copyright (c) 2001-@%@copyright_lastyear@%@ Univention GmbH, Germany"
+	echo "Copyright (c) 2001-2020 Univention GmbH, Germany"
 	echo ""
-}
-
-display_version() {
-	echo "univention-join @%@package_version@%@"
 }
 
 failed_message () {
@@ -352,10 +347,6 @@ do
 		"-checkPrerequisites")
 			shift
 			CHECK_RUN=true
-			;;
-		"--version")
-			display_version
-			exit 0
 			;;
 		"--help"|"-h"|"-?")
 			display_help

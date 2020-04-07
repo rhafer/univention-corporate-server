@@ -50,7 +50,6 @@ display_help() {
 	  --force               :  force execution of joinscripts which are already executed
 
 	  -h | --help | -?:        print this usage message and exit program
-	  --version:               print version information and exit program
 
 	Description:
 	  univention-run-join-scripts runs all join scripts existing on local computer.
@@ -60,12 +59,8 @@ display_help() {
 
 display_header() {
 	echo "univention-run-join-scripts: runs all join scripts existing on local computer."
-	echo "copyright (c) 2001-@%@copyright_lastyear@%@ Univention GmbH, Germany"
+	echo "Copyright (c) 2001-2020 Univention GmbH, Germany"
 	echo ""
-}
-
-display_version() {
-	echo "univention-run-join-scripts @%@package_version@%@"
 }
 
 failed_message () {
@@ -101,10 +96,6 @@ do
 		"--run-scripts")
 			RUN_SCRIPTS=1
 			shift
-			;;
-		"--version")
-			display_version
-			exit 0
 			;;
 		"--help"|"-h"|"-?")
 			display_help

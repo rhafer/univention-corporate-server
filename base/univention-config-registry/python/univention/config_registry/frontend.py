@@ -60,7 +60,6 @@ __all__ = [
 	'handler_search',
 	'handler_get',
 	'handler_info',
-	'handler_version',
 	'handler_help',
 	'main',
 ]
@@ -508,18 +507,6 @@ def handler_info(args, opts=dict()):
 			print(ex, file=sys.stderr)
 
 
-def handler_version(args, opts=dict()):
-	# type: (List[str], Dict[str, Any]) -> NoReturn
-	"""
-	Print version info.
-
-	:param args: Command line arguments.
-	:param opts: Command line options.
-	"""
-	print('univention-config-registry @%@package_version@%@')
-	sys.exit(0)
-
-
 def handler_help(args, opts=dict(), out=sys.stdout):
 	# type: (List[str], Dict[str, Any], IO) -> None
 	"""
@@ -539,9 +526,6 @@ Options:
 
   -h | --help | -?:
     print this usage message and exit program
-
-  --version | -v:
-    print version information and exit program
 
   --shell (valid actions: dump, search):
     convert key/value pair into shell compatible format, e.g.
@@ -628,7 +612,6 @@ HANDLERS = {
 OPT_ACTIONS = {
 	# name: [function, state, (alias list)]
 	'help': [handler_help, False, ('-h', '-?')],
-	'version': [handler_version, False, ('-v',)],
 	'debug': [lambda args: None, False, ()],
 }  # type: Dict[str, List]
 

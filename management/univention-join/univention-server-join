@@ -48,7 +48,7 @@ display_help() {
 	cat <<-EOL
 	Syntax:
 	  univention-server-join -hostname <hostname> -role <role> [options]
-	  univention-server-join [--help] [--version]
+	  univention-server-join [--help]
 
 	Options:
 	  -role <role>:            [domaincontroller_master|domaincontroller_backup|
@@ -64,7 +64,6 @@ display_help() {
 	  -bindpwfile:             Password for Univention Directory Manager
 
 	  -h | --help | -?:        print this usage message and exit program
-	  --version:               print version information and exit program
 
 	Description:
 	  univention-server-join joins a server to an univention domain,
@@ -75,12 +74,8 @@ display_help() {
 
 display_header() {
 	echo "univention-server-join: joins a server to an univention domain"
-	echo "copyright (c) 2001-@%@copyright_lastyear@%@ Univention GmbH, Germany"
+	echo "Copyright (c) 2001-2020 Univention GmbH, Germany"
 	echo ""
-}
-
-display_version() {
-	echo "univention-server-join @%@package_version@%@"
 }
 
 log() {
@@ -149,10 +144,6 @@ do
 		"-position")
 			POSITION="${2:?missing LDAP position}"
 			shift 2 || exit 2
-			;;
-		"--version")
-			display_version
-			exit 0
 			;;
 		"--help"|"-h"|"-?")
 			display_help

@@ -6,8 +6,6 @@ set -e -x
 "$PY" "$UCR" -\?
 "$PY" "$UCR" -h
 "$PY" "$UCR" --help
-"$PY" "$UCR" -v
-"$PY" "$UCR" --version
 "$PY" "$UCR" set key?value
 "$PY" "$UCR" set key=value
 "$PY" "$UCR" set --force key?value

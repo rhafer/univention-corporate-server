@@ -74,7 +74,7 @@ def display_help(out=sys.stdout):
 
 		Syntax:
 		  %(cmd)s [-timeout timeout] <pwd_file> [options] [user@]host <command>
-		  %(cmd)s [--help] [--version]
+		  %(cmd)s [--help]
 
 		Parameters:
 		  pwd_file                         file containing the password
@@ -87,7 +87,6 @@ def display_help(out=sys.stdout):
 		  -timeout:                        timeout for operation in seconds
 		  --no-split:                      don't word-split command
 		  -h | --help | -?:                print this usage message
-		  --version:                       print version information
 
 		Description:
 		  %(cmd)s is an internal managing tool which is used to
@@ -101,7 +100,7 @@ def display_help(out=sys.stdout):
 
 		Syntax:
 		  %(cmd)s [-timeout timeout] <pwd_file> [options] files [user@]host:[path]
-		  %(cmd)s [--help] [--version]
+		  %(cmd)s [--help]
 
 		Parameters:
 		  pwd_file                         file containing the password
@@ -115,7 +114,6 @@ def display_help(out=sys.stdout):
 		  -timeout:                        timeout for operation in seconds
 		  --no-split:                      don't word-split command
 		  -h | --help | -?:                print this usage message
-		  --version:                       print version information
 
 		Description:
 		  %(cmd)s is an internal managing tool which is used to
@@ -123,11 +121,6 @@ def display_help(out=sys.stdout):
 		  e.g. %(cmd)s /tmp/pwd file.txt root@192.168.0.31:
 		'''  # noqa: E101
 	print >>out, trim(text % {'cmd': cmd})
-
-
-def display_version(out=sys.stdout):
-	'''Display program name and version string.'''
-	print >>out, '%s @@package_version@@' % (cmd,)
 
 
 UNIVENTION_SSH_ASKPASS_HELPER = '/usr/lib/univention-ssh/univention-ssh-askpass'
@@ -147,10 +140,7 @@ try:
 
 	while True:
 		arg = sys.argv.pop(0)
-		if arg == '--version':
-			display_version()
-			sys.exit(0)
-		elif arg in ('-?', '--help', '-h'):
+		if arg in ('-?', '--help', '-h'):
 			display_help()
 			sys.exit(0)
 		elif arg == '-timeout':

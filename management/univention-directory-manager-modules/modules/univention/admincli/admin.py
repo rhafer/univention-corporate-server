@@ -62,11 +62,11 @@ univention.admin.modules.update()
 def usage():
 	out = []
 	out.append('univention-directory-manager: command line interface for managing UCS')
-	out.append('copyright (c) 2001-@%@copyright_lastyear@%@ Univention GmbH, Germany')
+	out.append('Copyright (c) 2001-2020 Univention GmbH, Germany')
 	out.append('')
 	out.append('Syntax:')
 	out.append('  univention-directory-manager module action [options]')
-	out.append('  univention-directory-manager [--help] [--version]')
+	out.append('  univention-directory-manager [--help]')
 	out.append('')
 	out.append('actions:')
 	out.append('  %-32s %s' % ('create:', 'Create a new object'))
@@ -76,7 +76,6 @@ def usage():
 	out.append('  %-32s %s' % ('move:', 'Move object in directory tree'))
 	out.append('')
 	out.append('  %-32s %s' % ('-h | --help | -?:', 'print this usage message'))
-	out.append('  %-32s %s' % ('--version:', 'print version information'))
 	out.append('')
 	out.append('general options:')
 	out.append('  --%-30s %s' % ('binddn', 'bind DN'))
@@ -129,12 +128,6 @@ def usage():
 	out.append('  Use "univention-directory-manager modules" for a list of available modules.')
 	out.append('')
 	return out
-
-
-def version():
-	o = []
-	o.append('univention-directory-manager @%@package_version@%@')
-	return o
 
 
 def _print_property(module, action, name, output):
@@ -444,9 +437,6 @@ def _doit(arglist):
 	module_name = arglist[1]
 	if module_name in ['-h', '--help', '-?']:
 		return usage()
-
-	if module_name == '--version':
-		return version()
 
 	if module_name == 'modules':
 		return list_available_modules()

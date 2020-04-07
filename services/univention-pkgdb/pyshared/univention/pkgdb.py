@@ -98,10 +98,6 @@ def parse_options():
 		help="Scan all packages of the local system and add them to the database using system name 'testsystemX', using 0001 to 1500 for X. For testing purposes only.",
 		action='append_const', dest='action', const='fill-testdb')
 	actions.add_option(
-		'--version',
-		help='Print version information and exit',
-		action='append_const', dest='action', const='version')
-	actions.add_option(
 		"--add-system", metavar='SYSTEM',
 		help='Add a SYSTEM as db-user-account. Normally this will be used by univention-listener',
 		action='store', dest='addsystem')
@@ -565,9 +561,6 @@ def open_database_connection(config_registry, pkgdbu=False, db_server=None):
 def main():
 	'''main function for univention-pkgdb-scan'''
 	options = parse_options()
-	if options.action == 'version':
-		print('%s %s' % (os.path.basename(sys.argv[0]), '@%@package_version@%@', ))
-		return 0
 
 	config_registry = univention.config_registry.ConfigRegistry()
 	config_registry.load()

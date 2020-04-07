@@ -36,11 +36,10 @@ display_help() {
 	display_header
 	echo "Syntax:"
 	echo "  univention-license-import <license file>"
-	echo "  univention-license-import [--help] [--version]"
+	echo "  univention-license-import [--help]"
 	echo ""
 	echo "Options:"
 	echo "  '-h | --help | -?:           print this usage message"
-	echo "  '--version:                  print version information"
 	echo ""
 	echo "Description:"
 	echo "  univention-license-import is a tool for importing license keys"
@@ -53,10 +52,6 @@ display_header() {
 	echo ""
 }
 
-display_version() {
-	echo "univention-license-import @VERSION@"
-}
-
 #if [ "`id -u`" != "0" ]; then
 #	echo "You need to be root to install a new license." >&2
 #	exit 1
@@ -65,10 +60,6 @@ if [ -z "$1" ]; then
 	exit 1
 else
 	case $1 in
-		--version)
-			display_version
-			exit 0
-			;;
 		-h|--help|-\?)
 			display_help
 			exit 0
