@@ -1,6 +1,5 @@
 #!/usr/bin/make -f
 #
-# 
 #  rules file for the debian package
 #
 # Copyright 2015-2020 Univention GmbH
