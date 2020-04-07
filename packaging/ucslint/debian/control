@@ -12,15 +12,16 @@ Standards-Version: 3.6.1
 Package: ucslint
 Architecture: all
 Depends:
- python-univention-namespace,
- ${python:Depends},
- ${python3:Depends},
- ${misc:Depends},
  devscripts,
  flake8,
- python-flake8,
  python-apt,
-Conflicts: ucs-tools (<< 1.2.5)
+ python-flake8,
+ python-univention-namespace,
+ ${misc:Depends},
+ ${python3:Depends},
+ ${python:Depends},
+Conflicts:
+ ucs-tools (<< 1.2.5),
 Description: Check packaging for UCS
  This package contains the Univention tool ucslint that
  is able to check debian source packages against common
@@ -34,11 +35,12 @@ Description: Check packaging for UCS
 Package: ucslint-univention
 Architecture: all
 Depends:
- ${python:Depends},
- ${python3:Depends},
+ ucslint,
  ${misc:Depends},
- ucslint
-Conflicts: ucs-tools (<< 1.2.5)
+ ${python3:Depends},
+ ${python:Depends},
+Conflicts:
+ ucs-tools (<< 1.2.5),
 Description: Univention-specific ucslint tests
  This package contains Univention specific tests for ucslint
  (e.g. copyright checks or maintainer information checks).
