@@ -592,7 +592,7 @@ def handleHost(dn, new, old):
 	# if host object resides within ou or container then parts of ou/container's dn is used as groupname
 	grpname = 'AllHosts'
 	ldapbase = listener.baseConfig['ldap/base']
-	result = re.search('^cn=%s(,.*?)?,%s$' % (host, ldapbase), dn)
+	result = re.search(r'^cn=%s(,.*?)?,%s$' % (host, ldapbase), dn)
 	if result and result.group(1):
 		grpname = re.sub(r',\w+=', '_', result.group(1))[1:]
 

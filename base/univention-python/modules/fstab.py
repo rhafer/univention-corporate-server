@@ -116,7 +116,7 @@ class mntent(object):
 			r = cls.__quote_re
 		except AttributeError:
 			import re
-			r = cls.__quote_re = re.compile('\\\\0([0-7]+)')
+			r = cls.__quote_re = re.compile(r'\\0([0-7]+)')
 		return r.sub(lambda m: chr(int(m.group(1), 8)), s)
 
 	def hasopt(self, opt):

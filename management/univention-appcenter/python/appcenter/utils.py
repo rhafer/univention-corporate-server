@@ -168,7 +168,7 @@ def generate_password():
 
 def underscore(value):
 	if value:
-		return re.sub('([a-z])([A-Z])', r'\1_\2', value).lower()
+		return re.sub(r'([a-z])([A-Z])', r'\1_\2', value).lower()
 
 
 def capfirst(value):

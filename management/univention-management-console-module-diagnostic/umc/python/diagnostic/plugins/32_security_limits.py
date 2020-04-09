@@ -41,7 +41,7 @@ def run(_umc_instance):
 	try:
 		with open('/var/log/samba/log.smbd', 'rb') as fd:
 			for line in fd:
-				counter += len(re.findall('Too many open files', line))
+				counter += len(re.findall(r'Too many open files', line))
 	except (OSError, IOError):
 		return  # logfile does not exists
 

@@ -111,7 +111,7 @@ def get_syntax_buffer(name=None, identifier=None):
 		identifier = name
 	return '''# UCS-TEST SYNTAX %(syntax_identifier)s
 class %(syntax_name)s(simple):
-		regex = re.compile('^ucstest-[0-9A-Za-z]+$')
+		regex = re.compile(r'^ucstest-[0-9A-Za-z]+$')
 		error_message = 'Wrong value given for ucs-test-syntax!'
 ''' % {'syntax_name': name, 'syntax_identifier': identifier}
 

@@ -34,7 +34,7 @@ except (ImportError, curses.error):
 class Dotter(object):
 
     """Handle dot graph."""
-    RE_KEY = re.compile('[^0-9A-Za-z]')
+    RE_KEY = re.compile(r'[^0-9A-Za-z]')
 
     def __init__(self, out=None):
         self.dot_out = out

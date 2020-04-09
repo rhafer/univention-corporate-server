@@ -470,7 +470,7 @@ class Instance(Base, ProgressMixin):
 
 		# check nameservers
 		for ikey, iname in [('nameserver[1-3]', _('Domain name server')), ('dns/forwarder[1-3]', _('External name server'))]:
-			reg = re.compile('^(%s)$' % ikey)
+			reg = re.compile(r'^(%s)$' % ikey)
 			for jkey, jval in values.iteritems():
 				if reg.match(jkey):
 					if not values.get(jkey):

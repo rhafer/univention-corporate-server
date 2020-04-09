@@ -46,7 +46,7 @@ import create_portal_entries
 import re
 ids = set()
 for key in ucr_keys():
-	match = re.match("ucs/web/overview/entries/(admin|service)/([^/]+)/.*", key)
+	match = re.match(r"ucs/web/overview/entries/(admin|service)/([^/]+)/.*", key)
 	if match:
 		ids.add(key)
 changes = dict((id, (None, None)) for id in ids)

@@ -3512,7 +3512,7 @@ class LicenseRequest(Resource):
 			error = str(exc)
 			if exc.response.code >= 500:
 				error = _('This seems to be a problem with the license server. Please try again later.')
-			match = re.search('<span id="details">(?P<details>.*?)</span>', exc.response.body, flags=re.DOTALL)
+			match = re.search(r'<span id="details">(?P<details>.*?)</span>', exc.response.body, flags=re.DOTALL)
 			if match:
 				error = match.group(1).replace('\n', '')
 			# FIXME: use original error handling

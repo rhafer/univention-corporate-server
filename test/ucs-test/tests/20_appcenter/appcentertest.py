@@ -449,7 +449,7 @@ class CheckOperations(object):
 	def _check_ucr_variables_dont_exist(self):
 		repository = "repository/online/component/{}".format(self.info.get("component_id"))
 		web_entries = "ucs/web/overview/entries/(admin|service)/{}".format(self.application)
-		pattern = re.compile("{}|{}".format(repository, web_entries))
+		pattern = re.compile(r"{}|{}".format(repository, web_entries))
 		active = [key for key in self.ucr.keys() if pattern.match(key)]
 		if active:
 			msg = "following UCR variables still active: {}"

@@ -61,7 +61,7 @@ class SynVoIP_Address(univention.admin.syntax.simple):
 	name = _('VoIP_Address')
 	min_length = 4
 	max_length = 256
-	_re = re.compile('((^(sip|h323|skype):)?([a-zA-Z])[a-zA-Z0-9._-]+)@[a-zA-Z0-9._-]+$')
+	_re = re.compile(r'((^(sip|h323|skype):)?([a-zA-Z])[a-zA-Z0-9._-]+)@[a-zA-Z0-9._-]+$')
 
 	def parse(self, text):
 		if self._re.match(text) is not None:

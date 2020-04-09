@@ -353,7 +353,7 @@ def handler_search(args, opts=dict()):
 	search_keys |= search_all
 
 	if not args:
-		regex = [re.compile('')]
+		regex = [re.compile(r'')]
 	else:
 		try:
 			regex = [re.compile(_) for _ in args]

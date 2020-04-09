@@ -58,7 +58,7 @@ if '-h' not in args:
 # read machine password
 secretFile = open('/etc/machine.secret', 'r')
 pwdLine = secretFile.readline()
-machine_password = re.sub('\n', '', pwdLine)
+machine_password = re.sub(r'\n', '', pwdLine)
 
 machine_uid = pwd.getpwnam('%s$' % (baseConfig['hostname']))[2]
 old_uid = os.getuid()

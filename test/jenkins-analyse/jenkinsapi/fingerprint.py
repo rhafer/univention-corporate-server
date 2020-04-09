@@ -18,7 +18,7 @@ class Fingerprint(JenkinsBase):
     """
     Represents a jenkins fingerprint on a single artifact file ??
     """
-    RE_MD5 = re.compile("^([0-9a-z]{32})$")
+    RE_MD5 = re.compile(r"^([0-9a-z]{32})$")
 
     def __init__(self, baseurl, id_, jenkins_obj):
         logging.basicConfig()

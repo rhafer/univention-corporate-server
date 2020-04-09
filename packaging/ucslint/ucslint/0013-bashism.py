@@ -71,7 +71,7 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 		for fn in uub.FilteredDirWalkGenerator(
 			path,
 			ignore_suffixes=['.po'],
-			reHashBang=re.compile('^#![ \t]*/bin/(?:d?a)?sh')
+			reHashBang=re.compile(r'^#![ \t]*/bin/(?:d?a)?sh')
 		):
 			self.debug('Testing file %s' % fn)
 			self.check_bashism(fn)

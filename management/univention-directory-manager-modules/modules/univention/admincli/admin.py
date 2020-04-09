@@ -571,7 +571,7 @@ def _doit(arglist):
 			out.append('E: Permission denied, try --binddn and --bindpwd')
 			return out + ["OPERATION FAILED"]
 		pwdLine = secretFile.readline()
-		pwd = re.sub('\n', '', pwdLine)
+		pwd = re.sub(r'\n', '', pwdLine)
 
 		try:
 			lo = univention.admin.uldap.access(host=configRegistry['ldap/master'], port=int(configRegistry.get('ldap/master/port', '7389')), base=baseDN, binddn=binddn, bindpw=pwd, start_tls=tls)

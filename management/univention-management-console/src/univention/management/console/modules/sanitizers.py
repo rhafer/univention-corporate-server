@@ -548,7 +548,7 @@ class PatternSanitizer(SearchSanitizer):
 			flags = flags | re.IGNORECASE
 		if self.multiline:
 			flags = flags | re.MULTILINE
-		return re.compile('^%s$' % value, flags)
+		return re.compile(r'^%s$' % value, flags)
 
 
 class StringSanitizer(Sanitizer):

@@ -56,7 +56,7 @@ def escape_value(value):
 	return '"%s"' % ''.join(map(lambda c: escapes.get(c, c), value))
 
 
-_RE_AT_JOB = re.compile('^job ([1-9][0-9]*) at .*')
+_RE_AT_JOB = re.compile(r'^job ([1-9][0-9]*) at .*')
 
 
 def create_at_job(script, time=None, date=None):

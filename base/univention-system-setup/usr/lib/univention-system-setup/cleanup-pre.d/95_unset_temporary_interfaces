@@ -36,7 +36,7 @@ import re
 import subprocess
 import univention.config_registry
 
-RE_IPV4_TYPE = re.compile('^interfaces/[^/]*/type$')
+RE_IPV4_TYPE = re.compile(r'^interfaces/[^/]*/type$')
 
 
 def unset_temporary_interfaces():

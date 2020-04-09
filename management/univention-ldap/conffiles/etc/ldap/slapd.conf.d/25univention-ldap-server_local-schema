@@ -35,7 +35,7 @@ def isSchemaFileIncluded(schemaFile):
 		p2 = subprocess.Popen(["ucr", "filter"], stdin=p1.stdout, stdout=subprocess.PIPE)
 		p1.stdout.close()
 		output = p2.communicate()[0].decode('utf-8', 'replace')
-		pattern = re.compile('include.*%s' % schemaFile)
+		pattern = re.compile(r'include.*%s' % schemaFile)
 		for line in output.split('\n'):
 			if line and pattern.match(line):
 				return True

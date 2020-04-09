@@ -83,7 +83,7 @@ from univention.appcenter.ucr import ucr_instance, ucr_save
 CACHE_DIR = AppCache().get_cache_dir()
 LOCAL_ARCHIVE = '/usr/share/univention-appcenter/local/all.tar.gz'
 FRONTEND_ICONS_DIR = '/usr/share/univention-management-console-frontend/js/dijit/themes/umc/icons'
-UCR_VARIABLE_TOKEN = re.compile('@%@')
+UCR_VARIABLE_TOKEN = re.compile(r'@%@')
 ucr = ucr_instance()
 
 _ = umc.Translation('univention-management-console-module-appcenter').translate
@@ -555,7 +555,7 @@ class Application(object):
 			if not server.startswith('http'):
 				server = 'https://%s' % server
 		else:
-			server = re.sub('https?://', '', server)
+			server = re.sub(r'https?://', '', server)
 		return server
 
 	def get_repository_url(self):

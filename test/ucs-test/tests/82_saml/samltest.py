@@ -34,13 +34,13 @@ class SamlLoginError(SamlError):
 		self._error_evaluation()
 
 	def _error_evaluation(self):
-		if re.search('<b>Your password is expired.</b>', bytes(self.page.text)):
+		if re.search(r'<b>Your password is expired.</b>', bytes(self.page.text)):
 			self.message = "Got password expired notice"
-		elif re.search('<b>Account expired.</b>', bytes(self.page.text)):
+		elif re.search(r'<b>Account expired.</b>', bytes(self.page.text)):
 			self.message = "Got account expired notice"
-		elif re.search('<b>Incorrect username or password.</b>', bytes(self.page.text)):
+		elif re.search(r'<b>Incorrect username or password.</b>', bytes(self.page.text)):
 			self.message = "Got incorrect username or password notice"
-		elif re.search('<b>Account not verified.</b>', bytes(self.page.text)):
+		elif re.search(r'<b>Account not verified.</b>', bytes(self.page.text)):
 			self.message = "Got unverified email notice"
 		else:
 			self.message = "Unknown error in SAML response.\nSAML response:\n%s" % self.page.text
@@ -186,7 +186,7 @@ class SamlTest(object):
 		auth_state = self.xpath('.//{http://www.w3.org/1999/xhtml}input[@name="AuthState"]').get('value')
 		if auth_state is None:
 			try:
-				auth_state = re.search('name="AuthState" value="([^"]+)"', bytes(self.page.text)).group(1)
+				auth_state = re.search(r'name="AuthState" value="([^"]+)"', bytes(self.page.text)).group(1)
 				auth_state = html.unescape(auth_state)
 			except AttributeError:
 				pass
@@ -271,7 +271,7 @@ class SamlTest(object):
 				# The kerberos backend adds a manual redirect
 				if not self.page or self.page.status_code != 401:
 					raise
-				login_link = re.search('<a href="([^"]+)">', bytes(self.page.text)).group(1)
+				login_link = re.search(r'<a href="([^"]+)">', bytes(self.page.text)).group(1)
 				self._request('GET', login_link, 200)
 			self._login_at_idp_with_credentials()
 

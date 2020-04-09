@@ -112,7 +112,7 @@ def print_descriptions(var):
 filterlist = {}
 
 import re
-rePort = re.compile('^\d+(:\d+)?$')
+rePort = re.compile(r'^\d+(:\d+)?$')
 
 # get package settings
 if configRegistry.is_true('security/packetfilter/use_packages', True):

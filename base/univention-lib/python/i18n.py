@@ -53,7 +53,7 @@ class Locale(object):
 	:type locale: str or None
 	"""
 
-	REGEX = re.compile('(?P<language>([a-z]{2}|C|POSIX))(_(?P<territory>[A-Z]{2}))?(.(?P<codeset>[a-zA-Z-0-9]+)(@(?P<modifier>.+))?)?')
+	REGEX = re.compile(r'(?P<language>([a-z]{2}|C|POSIX))(_(?P<territory>[A-Z]{2}))?(.(?P<codeset>[a-zA-Z-0-9]+)(@(?P<modifier>.+))?)?')
 
 	def __init__(self, locale=None):
 		# type: (Optional[str]) -> None

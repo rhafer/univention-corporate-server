@@ -650,7 +650,7 @@ class access:
 		:rtype: str
 		"""
 		dn = self.lo.lo.whoami_s()
-		return re.sub('^dn:', '', dn)
+		return re.sub(r'^dn:', '', dn)
 
 	def requireLicense(self, require=1):
 		# type: (int) -> None

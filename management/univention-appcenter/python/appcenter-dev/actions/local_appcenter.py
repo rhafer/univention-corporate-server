@@ -709,7 +709,7 @@ class DevSet(UniventionAppAction):
 		parser.add_argument('attrs', action=StoreAttrActions, metavar='ATTR=VALUE', nargs='+', help='The attribute that shall be altered')
 
 	def set_ini_value(self, section, attr, value, parser):
-		if not re.match('^[a-zA-Z0-9_]+$', attr):
+		if not re.match(r'^[a-zA-Z0-9_]+$', attr):
 			raise LocalAppCenterError('May not use %s as attribute' % attr)
 		try:
 			items = parser.items(section)

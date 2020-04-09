@@ -50,7 +50,7 @@ position = univention.admin.uldap.position(baseDN)
 
 secretFile = open('/etc/ldap.secret', 'r')
 pwdLine = secretFile.readline()
-pwd = re.sub('\n', '', pwdLine)
+pwd = re.sub(r'\n', '', pwdLine)
 tls = 2
 
 try:

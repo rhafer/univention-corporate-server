@@ -62,7 +62,7 @@ keytypes = {
 	18: 'aes256',
 }
 
-regEx = re.compile('^([a-zA-Z0-9-]*):?: (.*)')
+regEx = re.compile(r'^([a-zA-Z0-9-]*):?: (.*)')
 
 def decode_unicodePwd(value, kvno=0):
 	global krb5_context

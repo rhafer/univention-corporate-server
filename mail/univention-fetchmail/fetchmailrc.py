@@ -46,7 +46,7 @@ __initscript = '/etc/init.d/fetchmail'
 FETCHMAIL_OLD_PICKLE = "/var/spool/univention-fetchmail/fetchmail_old_dn"
 
 
-REpassword = re.compile("^poll .*? there with password '(.*?)' is '[^']+' here")
+REpassword = re.compile(r"^poll .*? there with password '(.*?)' is '[^']+' here")
 
 # ----- function to open an textfile with setuid(0) for root-action
 
@@ -95,7 +95,7 @@ def get_pw_from_rc(lines, uid):
 
 def objdelete(dlist, old):
 	if old and 'uid' in old and old['uid'][0]:
-		return [line for line in dlist if not re.search("#UID='%s'[ \t]*$" % old['uid'][0], line)]
+		return [line for line in dlist if not re.search(r"#UID='%s'[ \t]*$" % old['uid'][0], line)]
 	else:
 		univention.debug.debug(univention.debug.LISTENER, univention.debug.INFO, 'Removal of user in fetchmailrc failed: %s' % str(old.get('uid')))
 

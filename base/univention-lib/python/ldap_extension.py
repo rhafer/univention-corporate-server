@@ -206,7 +206,7 @@ class UniventionLDAPExtension(object):
 		(stdout, stderr) = p.communicate()
 		if p.returncode:
 			return (p.returncode, object_dn)
-		regex = re.compile('^dn: (.*)$', re.M)
+		regex = re.compile(r'^dn: (.*)$', re.M)
 		m = regex.search(stdout)
 		if m:
 			object_dn = m.group(1)
@@ -240,7 +240,7 @@ class UniventionLDAPExtension(object):
 		rc, stdout = self.udm_find_object()
 		if rc:
 			return (rc, object_dn, stdout)
-		regex = re.compile('^DN: (.*)$', re.M)
+		regex = re.compile(r'^DN: (.*)$', re.M)
 		m = regex.search(stdout)
 		if m:
 			object_dn = m.group(1)
@@ -335,7 +335,7 @@ class UniventionLDAPExtension(object):
 			(stdout, stderr) = p.communicate()
 			print(stdout)
 			if p.returncode == 0:
-				regex = re.compile('^Object created: (.*)$', re.M)
+				regex = re.compile(r'^Object created: (.*)$', re.M)
 				m = regex.search(stdout)
 				if m:
 					new_object_dn = m.group(1)
@@ -358,7 +358,7 @@ class UniventionLDAPExtension(object):
 					sys.exit(1)
 
 		if self.object_dn:  # object exists already, modify it
-			regex = re.compile('^ *package: (.*)$', re.M)
+			regex = re.compile(r'^ *package: (.*)$', re.M)
 			m = regex.search(stdout)
 			if m:
 				registered_package = m.group(1)
@@ -367,7 +367,7 @@ class UniventionLDAPExtension(object):
 			else:
 				registered_package = None
 
-			regex = re.compile('^ *packageversion: (.*)$', re.M)
+			regex = re.compile(r'^ *packageversion: (.*)$', re.M)
 			m = regex.search(stdout)
 			if m:
 				registered_package_version = m.group(1)
@@ -384,7 +384,7 @@ class UniventionLDAPExtension(object):
 			else:
 				print("WARNING: Object %s was registered by package %s version %s, changing ownership." % (self.objectname, registered_package, registered_package_version,), file=sys.stderr)
 
-			regex = re.compile('^ *data: (.*)$', re.M)
+			regex = re.compile(r'^ *data: (.*)$', re.M)
 			m = regex.search(stdout)
 			if m:
 				old_data = m.group(1)
@@ -393,7 +393,7 @@ class UniventionLDAPExtension(object):
 			else:
 				old_data = None
 
-			regex = re.compile('^ *filename: (.*)$', re.M)
+			regex = re.compile(r'^ *filename: (.*)$', re.M)
 			m = regex.search(stdout)
 			if m:
 				old_filename = m.group(1)
@@ -439,7 +439,7 @@ class UniventionLDAPExtension(object):
 			return
 
 		app_filter = ""
-		regex = re.compile('^ *appidentifier: (.*)$', re.M)
+		regex = re.compile(r'^ *appidentifier: (.*)$', re.M)
 		for appidentifier in regex.findall(stdout):
 			if appidentifier != "None":
 				app_filter = app_filter + filter_format("(cn=%s)", [appidentifier])
@@ -452,7 +452,7 @@ class UniventionLDAPExtension(object):
 				print("ERROR: LDAP search failed: %s" % (stdout,), file=sys.stderr)
 				sys.exit(1)
 			if stdout:
-				regex = re.compile('^cn: (.*)$', re.M)
+				regex = re.compile(r'^cn: (.*)$', re.M)
 				apps = ",".join(regex.findall(stdout))
 				print("INFO: The object %s is still registered by the following apps: %s" % (objectname, apps,), file=sys.stderr)
 				sys.exit(2)
@@ -1046,7 +1046,7 @@ def option_validate_existing_filename(option, opt, value):
 
 
 def option_validate_ucs_version(option, opt, value):
-	regex = re.compile("[-.0-9]+")
+	regex = re.compile(r"[-.0-9]+")
 	if not regex.match(value):
 		raise OptionValueError("%s: may only contain digit, dot and dash characters: %s" % (opt, value))
 	return value

@@ -38,8 +38,8 @@ from .tokens import Token, TextToken, AttributeToken, PolicyToken, QueryToken, H
 
 class Parser(object):
 
-	REGEX_OPEN = re.compile('<@(?P<tag>[^/][^ ]+)( +(?P<attrs>([a-z-0-9]+="[^"]*" *)*)|)@>')
-	REGEX_CLOSE = re.compile('<@/(?P<tag>[^ ]+) *@>')
+	REGEX_OPEN = re.compile(r'<@(?P<tag>[^/][^ ]+)( +(?P<attrs>([a-z-0-9]+="[^"]*" *)*)|)@>')
+	REGEX_CLOSE = re.compile(r'<@/(?P<tag>[^ ]+) *@>')
 	START = '<@'
 	END = '@>'
 

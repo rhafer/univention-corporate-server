@@ -762,7 +762,7 @@ class simpleLdap(object):
 				copyobject.create()
 				to_be_moved = []
 				moved = []
-				pattern = re.compile('%s$' % (re.escape(self.dn),), flags=re.I)
+				pattern = re.compile(r'%s$' % (re.escape(self.dn),), flags=re.I)
 				try:
 					for subolddn, suboldattrs in subelements:
 						# Convert the DNs to lowercase before the replacement. The cases might be mixed up if the python lib is
@@ -834,7 +834,7 @@ class simpleLdap(object):
 			try:
 				for subolddn, suboldattrs in subelements:
 					ud.debug(ud.ADMIN, ud.INFO, 'move: subelement %s' % subolddn)
-					subnewdn = re.sub('%s$' % (re.escape(olddn),), newdn, subolddn)  # FIXME: looks broken
+					subnewdn = re.sub(r'%s$' % (re.escape(olddn),), newdn, subolddn)  # FIXME: looks broken
 					submodule = univention.admin.modules.identifyOne(subolddn, suboldattrs)
 					submodule = univention.admin.modules.get(submodule)
 					subobject = univention.admin.objects.get(submodule, None, self.lo, position='', dn=subolddn)
@@ -1439,7 +1439,7 @@ class simpleLdap(object):
 		for attr, val in newattr.items():
 			if not val:
 				continue
-			if re.sub(';binary$', '', attr.lower()) not in allowed:
+			if re.sub(r';binary$', '', attr.lower()) not in allowed:
 				ud.debug(ud.ADMIN, ud.WARN, 'The attribute %r is not allowed by any object class.' % (attr,))
 				# ml.append((attr, val, [])) # TODO: Remove the now invalid attribute instead
 				return ml
@@ -2305,7 +2305,7 @@ class simpleComputer(simpleLdap):
 				results = self.lo.search(base=tmppos.getBase(), scope='domain', attr=['zoneName'], filter=filter_format('(&(relativeDomainName=%s)(aAAARecord=%s))', (name, ip)), unique=False)
 			else:
 				subnet = '%s.' % ('.'.join(reversed(explode_dn(zoneDn, 1)[0].replace('.in-addr.arpa', '').split('.'))))
-				ipPart = re.sub('^%s' % (re.escape(subnet),), '', ip)
+				ipPart = re.sub(r'^%s' % (re.escape(subnet),), '', ip)
 				if ipPart == ip:
 					raise univention.admin.uexceptions.InvalidDNS_Information(_('Reverse zone and IP address are incompatible.'))
 				ipPart = '.'.join(reversed(ipPart.split('.')))

@@ -1698,10 +1698,10 @@ class AD_Takeover_Finalize(object):
 		ipv4_interfaces = list()
 		ipv6_interfaces = list()
 		for k in self.ucr.keys():
-			m = re.match('interfaces/([^/]+)/address', k)
+			m = re.match(r'interfaces/([^/]+)/address', k)
 			if m:
 				ipv4_interfaces.append(m.group(1))
-			m = re.match('interfaces/([^/]+)/ipv6/default/address', k)
+			m = re.match(r'interfaces/([^/]+)/ipv6/default/address', k)
 			if m:
 				ipv6_interfaces.append(m.group(1))
 		if ipv4 and ipv4_interfaces:

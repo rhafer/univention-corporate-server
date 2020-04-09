@@ -200,7 +200,7 @@ class CheckLogFiles(object):
         InstallProfile = Profile()
         try:
             InstallProfile.load(filename='/etc/univention/installation_profile')
-            if bool(re.match('false',
+            if bool(re.match(r'false',
                              InstallProfile.get_list('call_master_joinscripts')[0],
                              re.IGNORECASE)):
                 print("\nThe 'call_master_joinscripts' is 'false' in "

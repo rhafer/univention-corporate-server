@@ -78,7 +78,7 @@ class _Link(object):
 def _handler(ucr, changes):
 	changed_entries = set()
 	for key in changes.keys():
-		match = re.match('ucs/web/overview/entries/(admin|service)/([^/]+)/.*', key)
+		match = re.match(r'ucs/web/overview/entries/(admin|service)/([^/]+)/.*', key)
 		if match:
 			changed_entries.add(match.group(2))
 	changed_entries -= set(['umc', 'invalid-certificate-list', 'root-certificate', 'ldap-master'])
@@ -106,7 +106,7 @@ def _handler(ucr, changes):
 	for changed_entry in changed_entries:
 		attr_entries[changed_entry] = {}
 	for ucr_key in ucr.keys():
-		match = re.match('ucs/web/overview/entries/([^/]+)/([^/]+)/(.*)', ucr_key)
+		match = re.match(r'ucs/web/overview/entries/([^/]+)/([^/]+)/(.*)', ucr_key)
 		if not match:
 			continue
 		category = match.group(1)

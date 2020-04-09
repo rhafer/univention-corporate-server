@@ -60,10 +60,10 @@ except ImportError:
 
 __all__ = ['ConfigHandlers']
 
-VARIABLE_PATTERN = re.compile('@%@([^@]+)@%@')
-VARIABLE_TOKEN = re.compile('@%@')
-EXECUTE_TOKEN = re.compile('@!@')
-WARNING_PATTERN = re.compile('(UCRWARNING|BCWARNING|UCRWARNING_ASCII)=(.+)')
+VARIABLE_PATTERN = re.compile(r'@%@([^@]+)@%@')
+VARIABLE_TOKEN = re.compile(r'@%@')
+EXECUTE_TOKEN = re.compile(r'@!@')
+WARNING_PATTERN = re.compile(r'(UCRWARNING|BCWARNING|UCRWARNING_ASCII)=(.+)')
 
 INFO_DIR = '/etc/univention/templates/info'
 FILE_DIR = '/etc/univention/templates/files'
@@ -641,7 +641,7 @@ class ConfigHandlers:
 	VERSION_MAX = 3
 	VERSION_TEXT = 'univention-config cache, version'
 	VERSION_NOTICE = '%s %s\n' % (VERSION_TEXT, VERSION)
-	VERSION_RE = re.compile('^%s (?P<version>[0-9]+)$' % VERSION_TEXT)
+	VERSION_RE = re.compile(r'^%s (?P<version>[0-9]+)$' % VERSION_TEXT)
 
 	_handlers = {}    # type: Dict[str, Set[ConfigHandler]] # variable -> set(handlers)
 	_multifiles = {}  # type: Dict[str, ConfigHandlerMultifile] # multifile -> handler

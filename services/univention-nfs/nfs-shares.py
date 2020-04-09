@@ -50,7 +50,7 @@ filter = '(&(objectClass=univentionShare)(|(univentionShareHost=%s.%s)(univentio
 modrdn = '1'
 
 __exports = '/etc/exports'
-__comment_pattern = re.compile('^"*/.*#[ \t]*LDAP:[ \t]*(.*)')
+__comment_pattern = re.compile(r'^"*/.*#[ \t]*LDAP:[ \t]*(.*)')
 
 tmpFile = '/var/cache/univention-directory-listener/nfs-shares.oldObject'
 

@@ -177,7 +177,7 @@ class Mountpoints(object):
 		# /dev/mapper/vg_ucs-rootfs      24  307200  409600       0       8       0       0       0
 		# /dev/vda2       0       0       0       0       0       0       0       0
 		quota_stdout, stderr_empty = p.communicate()
-		regex = re.compile('^ *(?P<device>[^ ]*) *(?P<bused>[0-9]*). *(?P<bsoft>[0-9]*) *(?P<bhard>[0-9]*) *(?P<btime>[0-9]*) *(?P<fused>[0-9]*). *(?P<fsoft>[0-9]*) *(?P<fhard>[0-9]*) *(?P<ftime>[0-9]*)$')
+		regex = re.compile(r'^ *(?P<device>[^ ]*) *(?P<bused>[0-9]*). *(?P<bsoft>[0-9]*) *(?P<bhard>[0-9]*) *(?P<btime>[0-9]*) *(?P<fused>[0-9]*). *(?P<fsoft>[0-9]*) *(?P<fhard>[0-9]*) *(?P<ftime>[0-9]*)$')
 		for quotaline in quota_stdout.split('\n'):
 			matches = regex.match(quotaline)
 			if not matches:

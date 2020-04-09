@@ -158,7 +158,7 @@ def validate_key(key, out=sys.stderr):
 	return False
 
 
-INVALID_KEY_CHARS = re.compile('[][\r\n!"#$%&\'()+,;<=>?\\\\`{}§]')
+INVALID_KEY_CHARS = re.compile(r'''[][\r\n!"#$%&'()+,;<=>?\\`{}§]''')
 
 
 def directory_files(directory):

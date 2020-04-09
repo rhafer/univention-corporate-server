@@ -64,7 +64,7 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 			self.addmsg('0007-1', 'failed to open and read file', fn)
 			return
 
-		REchangelog = re.compile('^ -- [^<]+ <[^>]+>', re.M)
+		REchangelog = re.compile(r'^ -- [^<]+ <[^>]+>', re.M)
 
 		firstEntry = REchangelog.split(content)[0]
 		match = REticket.search(firstEntry)

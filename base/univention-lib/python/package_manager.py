@@ -1055,9 +1055,9 @@ class PackageManager(object):
 					elif errno == ENOENT and type_ == 'rename':
 						renaming_failed = True
 						continue
-			msg = re.sub('^W:', _('Warning: '), msg)
-			msg = re.sub('^E:', _('Error: '), msg)
-			msg = re.sub(',$', '.', msg)
+			msg = re.sub(r'^W:', _('Warning: '), msg)
+			msg = re.sub(r'^E:', _('Error: '), msg)
+			msg = re.sub(r',$', '.', msg)
 			if not msg.endswith('.'):
 				msg = '%s.' % msg
 			further.add(msg)

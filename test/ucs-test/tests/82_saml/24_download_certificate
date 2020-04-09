@@ -14,13 +14,13 @@ from univention.testing.utils import fail
 
 def extract_base64_certificate_from_cert(certificate):
 	certificate = certificate.replace("\n", "")
-	base64_cert = re.search('.*-----BEGIN CERTIFICATE-----(?P<base64>.*)-----END CERTIFICATE-----.*', certificate).group('base64')
+	base64_cert = re.search(r'.*-----BEGIN CERTIFICATE-----(?P<base64>.*)-----END CERTIFICATE-----.*', certificate).group('base64')
 	return base64_cert
 
 
 def extract_base64_certificate_from_metadata(metadata):
 	metadata = metadata.replace("\n", "")
-	base64_cert = re.search('.*<ds:X509Certificate>(?P<base64>.*)</ds:X509Certificate>.*', metadata).group('base64')
+	base64_cert = re.search(r'.*<ds:X509Certificate>(?P<base64>.*)</ds:X509Certificate>.*', metadata).group('base64')
 	return base64_cert
 
 

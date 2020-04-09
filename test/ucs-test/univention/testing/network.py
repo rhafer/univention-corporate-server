@@ -115,7 +115,7 @@ class NetworkRedirector(object):
 		self.ucr = univention.config_registry.ConfigRegistry()
 		self.ucr.load()
 		self._external_address = None
-		reUCRaddr = re.compile('^interfaces/[^/]+/address$')
+		reUCRaddr = re.compile(r'^interfaces/[^/]+/address$')
 		for key in self.ucr.keys():
 			if reUCRaddr.match(key):
 				self._external_address = self.ucr.get(key)

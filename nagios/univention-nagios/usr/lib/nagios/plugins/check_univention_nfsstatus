@@ -46,10 +46,10 @@ class FSMountCheck:
 		self.errorstate = 'CRITICAL'
 		self.allnfs = 0
 		self.verbose = 0
-		self.re_fstab = re.compile('^(.*?)[ \t]+(.*?)[ \t]+(.*?)[ \t]+(.*?)[ \t]+')
-		self.re_mounts = re.compile('^(.*?) (.*?) (.*?) (.*?) ')
-		self.re_comment = re.compile('^[ \t]*#')
-		self.re_noauto = re.compile('(?:^|,)noauto(?:,|$)', re.IGNORECASE)
+		self.re_fstab = re.compile(r'^(.*?)[ \t]+(.*?)[ \t]+(.*?)[ \t]+(.*?)[ \t]+')
+		self.re_mounts = re.compile(r'^(.*?) (.*?) (.*?) (.*?) ')
+		self.re_comment = re.compile(r'^[ \t]*#')
+		self.re_noauto = re.compile(r'(?:^|,)noauto(?:,|$)', re.IGNORECASE)
 
 		self.STATE = {
 			'OK': 0,

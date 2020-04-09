@@ -65,7 +65,7 @@ def check_ldap(app):
 def check_webinterface(app):
 	print('    Webinterface for', app)
 	for key in ucr_keys():
-		if re.match('ucs/web/overview/entries/.*/%s/link', key):
+		if re.match(r'ucs/web/overview/entries/.*/%s/link', key):
 			utils.fail('FAIL: webinterface still configured' % app.id)
 
 

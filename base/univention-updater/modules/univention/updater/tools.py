@@ -76,8 +76,8 @@ try:
 except ImportError:
     pass
 
-RE_ALLOWED_DEBIAN_PKGNAMES = re.compile('^[a-z0-9][a-z0-9.+-]+$')
-RE_SPLIT_MULTI = re.compile('[ ,]+')
+RE_ALLOWED_DEBIAN_PKGNAMES = re.compile(r'^[a-z0-9][a-z0-9.+-]+$')
+RE_SPLIT_MULTI = re.compile(r'[ ,]+')
 RE_COMPONENT = re.compile(r'^repository/online/component/([^/]+)$')
 RE_CREDENTIALS = re.compile(r'^repository/credentials/(?:(?P<realm>[^/]+)/)?(?P<key>[^/]+)$')
 
@@ -1209,8 +1209,8 @@ class UniventionUpdater(object):
             comp_file = open(self.FN_UPDATER_APTSOURCES_COMPONENT, 'r')
         except IOError:
             return self.COMPONENT_UNKNOWN
-        rePath = re.compile('(un)?maintained/component/ ?%s/' % name)
-        reDenied = re.compile('credentials not accepted: %s$' % name)
+        rePath = re.compile(r'(un)?maintained/component/ ?%s/' % name)
+        reDenied = re.compile(r'credentials not accepted: %s$' % name)
         try:
             # default: file contains no valid repo entry
             result = self.COMPONENT_NOT_FOUND

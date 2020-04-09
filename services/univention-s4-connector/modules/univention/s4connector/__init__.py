@@ -626,7 +626,7 @@ class ucs:
 	def list_rejected_ucs(self, filter_noresync=False):
 		rejected = self._get_config_items('UCS rejected')
 		if filter_noresync:
-			no_resync = re.compile('^<NORESYNC(=.*?)?>;')
+			no_resync = re.compile(r'^<NORESYNC(=.*?)?>;')
 			return [(fn, dn) for (fn, dn) in rejected if no_resync.match(dn) is None]
 		return rejected
 

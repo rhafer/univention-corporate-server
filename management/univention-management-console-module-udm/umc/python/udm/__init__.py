@@ -1273,7 +1273,7 @@ class Instance(Base, ProgressMixin):
 			strerror = ''
 			if hasattr(exc, 'read'):  # try to parse an html error
 				body = exc.read()
-				match = re.search('<span id="details">(?P<details>.*?)</span>', body, flags=re.DOTALL)
+				match = re.search(r'<span id="details">(?P<details>.*?)</span>', body, flags=re.DOTALL)
 				if match:
 					strerror = match.group(1).replace('\n', '')
 			if not strerror:

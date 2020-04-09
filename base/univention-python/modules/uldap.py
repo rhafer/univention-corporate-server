@@ -336,7 +336,7 @@ class access(object):
 		:rtype: str
 		"""
 		dn = self.lo.whoami_s()
-		return re.sub('^dn:', '', dn)
+		return re.sub(r'^dn:', '', dn)
 
 	def _reconnect(self):
 		# type: () -> None

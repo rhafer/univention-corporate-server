@@ -75,7 +75,7 @@ def get_ldap_connection(baseDN):
 		ud.debug(ud.ADMIN, ud.ERROR, "loading %s failed" % secretFileName)
 		sys.exit(1)
 	pwdLine = secretFile.readline()
-	pwd = re.sub('\n', '', pwdLine)
+	pwd = re.sub(r'\n', '', pwdLine)
 
 	try:
 		lo = univention.admin.uldap.access(host=configRegistry['ldap/master'], base=baseDN, binddn=binddn, bindpw=pwd, start_tls=2)

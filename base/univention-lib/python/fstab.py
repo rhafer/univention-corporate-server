@@ -41,7 +41,7 @@ class File(list):
 
 	:param str file: The name of the file.
 	"""
-	_is_comment = re.compile('[ \t]*#').search
+	_is_comment = re.compile(r'[ \t]*#').search
 	_filesystems = ('ext2', 'xfs', 'nfs', 'proc', 'auto', 'swap')
 
 	def __init__(self, file='/etc/fstab'):

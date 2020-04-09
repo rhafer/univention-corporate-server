@@ -51,7 +51,7 @@ def handler(dn, new, old):
 	configRegistry = univention.config_registry.ConfigRegistry()
 	configRegistry.load()
 
-	old_hosteddomains = set(re.split('[ ]+', configRegistry.get('mail/hosteddomains', '')))
+	old_hosteddomains = set(re.split(r'[ ]+', configRegistry.get('mail/hosteddomains', '')))
 	hosteddomains = old_hosteddomains.copy()
 
 	# remove old add new

@@ -421,17 +421,17 @@ class Device(object):
 		self.ip6dynamic = ucr.is_true(value=vals.pop('interfaces/%s/ipv6/acceptRA' % (name), None))
 
 		for key in vals.copy():
-			if re.match('^interfaces/%s/options/[0-9]+$' % re.escape(name), key):
+			if re.match(r'^interfaces/%s/options/[0-9]+$' % re.escape(name), key):
 				self.options.append(vals.pop(key))
 				continue
 
-			match = re.match('^interfaces/%s/ipv6/([^/]+)/address' % re.escape(name), key)
+			match = re.match(r'^interfaces/%s/ipv6/([^/]+)/address' % re.escape(name), key)
 			if match:
 				identifier = match.group(1)
 				self.ip6.append((vals.pop(key), vals.pop('interfaces/%s/ipv6/%s/prefix' % (name, identifier), ''), identifier))
 				continue
 
-			match = re.match('^interfaces/(%s_[0-9]+)/address' % re.escape(name), key)
+			match = re.match(r'^interfaces/(%s_[0-9]+)/address' % re.escape(name), key)
 			if match:
 				self.ip4.append((vals.pop(key), vals.pop('interfaces/%s/netmask' % match.group(1), '24')))
 				continue
@@ -447,7 +447,7 @@ class Device(object):
 		"""
 		name = self.name
 
-		pattern = re.compile('^interfaces/%s(?:_[0-9]+)?/.*' % re.escape(name))
+		pattern = re.compile(r'^interfaces/%s(?:_[0-9]+)?/.*' % re.escape(name))
 		vals = dict((key, None) for key in ucr if pattern.match(key))
 
 		for key, val in self._leftover:

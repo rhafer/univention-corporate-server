@@ -104,7 +104,7 @@ def lookup_dn(user):
 	except (OSError, subprocess.CalledProcessError) as error:
 		exit("Error calling univention-s4search: " + str(error))
 
-	match = re.search("^dn: (.*)$", output, re.MULTILINE)
+	match = re.search(r"^dn: (.*)$", output, re.MULTILINE)
 	if match and match.group(1):
 		return match.group(1)
 	exit("Unable to find DN for user " + user)

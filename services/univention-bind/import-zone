@@ -53,7 +53,7 @@ ldap_types = {
 	'TXT': 'tXTRecord',
 	'PTR': 'pTRRecord'
 }
-record_pattern = re.compile('^([^\t ]+)[\t ]+([0-9]+)[\t ]+([^\t ]+)[\t ]+([^\t ]+)[\t ]+(.+)$')
+record_pattern = re.compile(r'^([^\t ]+)[\t ]+([0-9]+)[\t ]+([^\t ]+)[\t ]+([^\t ]+)[\t ]+(.+)$')
 
 all = {}
 

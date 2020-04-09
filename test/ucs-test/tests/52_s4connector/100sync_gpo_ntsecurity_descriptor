@@ -243,7 +243,7 @@ class Testclass_GPO_Security_Descriptor(object):
 
 		stdout = stdout.rstrip()
 		try:
-			self.gponame = '{' + re.search('{(.+?)}', stdout).group(1) + '}'
+			self.gponame = '{' + re.search(r'{(.+?)}', stdout).group(1) + '}'
 			self.gpo_ldap_filter = self.SAM_LDAP_FILTER_GPO % (self.gponame,)
 		except AttributeError as ex:
 			utils.fail("Could not find the GPO reference in the STDOUT "

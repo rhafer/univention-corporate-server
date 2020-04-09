@@ -54,7 +54,7 @@ if __name__ == '__main__':
 			print(" iptables rules before firewall restart:\n" + iptables_save_after_installation)
 			docker_iptables_rules = []
 			for line in iptables_save_after_installation.split("\n"):
-				if not re.match('^#.*', line) and not re.match('^:.*ACCEPT.*', line):
+				if not re.match(r'^#.*', line) and not re.match(r'^:.*ACCEPT.*', line):
 					docker_iptables_rules.append(line)
 
 			restart_firewall()

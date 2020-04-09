@@ -824,7 +824,7 @@ class Node(PersistentCached):
 			logger.warning("Failed to load cached state of %s: %s", uri, ex)
 			self.pd = Data_Node()  # public data
 			self.pd.uri = uri
-			self.pd.name = re.sub('^[^:]+://(?:[^/@]+@)?([^/]+).*', lambda m: m.group(1), uri)
+			self.pd.name = re.sub(r'^[^:]+://(?:[^/@]+@)?([^/]+).*', lambda m: m.group(1), uri)
 		self._cache_id = self.calc_cache_id()
 
 		# schedule periodic update

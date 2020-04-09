@@ -66,7 +66,7 @@ def docker_shell(app, command):
 
 @contextmanager
 def install_app(app):
-	username = re.match('uid=([^,]*),.*', ucr_get('tests/domainadmin/account')).groups()[0]
+	username = re.match(r'uid=([^,]*),.*', ucr_get('tests/domainadmin/account')).groups()[0]
 	install = get_action('install')
 	install.call(app=app, username=username, password=ucr_get('tests/domainadmin/pwd'), noninteractive=True)
 	yield app

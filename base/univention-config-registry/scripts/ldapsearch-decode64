@@ -35,7 +35,7 @@ import sys
 import re
 import base64
 
-regEx = re.compile('^([a-zA-Z0-9-]*):: (.*)')
+regEx = re.compile(r'^([a-zA-Z0-9-]*):: (.*)')
 
 try:
 	line = sys.stdin.readline()

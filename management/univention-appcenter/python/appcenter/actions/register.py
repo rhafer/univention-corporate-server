@@ -564,7 +564,7 @@ class AppListener(AppListener):
 	def _register_app_report_variables(self, app):
 		updates = {}
 		for key in ucr_keys():
-			if re.match('appreport/%s/' % app.id, key):
+			if re.match(r'appreport/%s/' % app.id, key):
 				updates[key] = None
 		registry_key = 'appreport/%s/%%s' % app.id
 		anything_set = False
@@ -581,7 +581,7 @@ class AppListener(AppListener):
 		updates = {}
 		if app.ucs_overview_category is not False:
 			for key in ucr_keys():
-				if re.match('ucs/web/overview/entries/[^/]+/%s/' % app.id, key):
+				if re.match(r'ucs/web/overview/entries/[^/]+/%s/' % app.id, key):
 					updates[key] = None
 		if app.ucs_overview_category and app.web_interface:
 			self.log('Setting overview variables')
@@ -622,9 +622,9 @@ class AppListener(AppListener):
 		for key in ucr_keys():
 			if key.startswith('appcenter/apps/%s/' % app.id):
 				updates[key] = None
-			if re.match('ucs/web/overview/entries/[^/]+/%s/' % app.id, key):
+			if re.match(r'ucs/web/overview/entries/[^/]+/%s/' % app.id, key):
 				updates[key] = None
-			if re.match('appreport/%s/' % app.id, key):
+			if re.match(r'appreport/%s/' % app.id, key):
 				updates[key] = None
 		if app.docker and not app.plugin_of:
 			try:

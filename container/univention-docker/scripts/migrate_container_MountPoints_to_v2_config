@@ -55,7 +55,7 @@ def main():
 
 def migrate_all_app_containers():
 	log = getLogger(__name__).getChild('migrate_all_app_containers')
-	p = re.compile('^appcenter/apps/(.*)/container$')
+	p = re.compile(r'^appcenter/apps/(.*)/container$')
 
 	rc = 0
 	for ucr_key, container_id in ucr.items():

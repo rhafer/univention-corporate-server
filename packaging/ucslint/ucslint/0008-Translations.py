@@ -108,9 +108,9 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 
 	def check_po(self, po_files):
 		"""Check Portable Object files."""
-		regEx1 = re.compile('\n#.*?fuzzy')
-		regEx2 = re.compile('msgstr ""\n\n', re.DOTALL)
-		regExCharset = re.compile('"Content-Type: text/plain; charset=(.*?)\\\\n"', re.DOTALL)
+		regEx1 = re.compile(r'\n#.*?fuzzy')
+		regEx2 = re.compile(r'msgstr ""\n\n', re.DOTALL)
+		regExCharset = re.compile(r'"Content-Type: text/plain; charset=(.*?)\\n"', re.DOTALL)
 
 		for fn in po_files:
 			try:

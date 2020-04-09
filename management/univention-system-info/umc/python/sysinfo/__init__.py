@@ -62,7 +62,7 @@ class Instance(umcm.Base):
 
 	def __init__(self):
 		umcm.Base.__init__(self)
-		self.mem_regex = re.compile('([0-9]*) kB')
+		self.mem_regex = re.compile(r'([0-9]*) kB')
 
 	def _call(self, command):
 		try:

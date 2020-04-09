@@ -125,7 +125,7 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 			fn_rules = os.path.join(path, 'debian', 'rules')
 			with open(fn_rules) as fd:
 				rules = fd.read()
-				if re.search('--with[ =]*["\']?python_support', rules):
+				if re.search(r'''--with[ =]*["']?python_support''', rules):
 					self.addmsg('0011-18', 'please use --with python2,python3 instead of python_support', filename=fn_rules)
 		except IOError:
 			pass
