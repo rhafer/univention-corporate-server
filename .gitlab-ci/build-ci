@@ -24,6 +24,15 @@ do
 	[ -f "$cl" ] || continue
 	path="${cl%/debian/changelog}"
 	pkg="${path##*/}"
+	echo
+	echo "lint ${pkg}:"
+	echo '  variables:'
+	echo "    base: $path"
+	echo '  extends: .lint'
+	echo '  rules:'
+	echo '    - changes:'
+	echo "      - ${path}/**/*"
+	echo '      - packaging/ucslint/**/*'
 
 	case "${path##*/}" in
 		shim) continue ;;  # Depends on scope ucs_3.2-0-uefi-secureboot-tools

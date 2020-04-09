@@ -1,0 +1,7 @@
+ARG ucs=latest
+FROM docker-registry.knut.univention.de/phahn/ucs-minbase:$ucs
+RUN apt-get -qq update && apt-get -qq install --no-install-recommends devscripts flake8 python-apt python-flake8
+COPY bin/ucslint /usr/local/bin/
+COPY ucslint /usr/local/ucslint/
+COPY ucslint-univention /usr/local/ucslint/
+CMD ["ucslint"]
