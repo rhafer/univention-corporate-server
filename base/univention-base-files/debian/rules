@@ -38,14 +38,7 @@ override_dh_auto_install:
 
 override_dh_install:
 	dh_install
-	mv debian/univention-base-files/usr/lib/univention-directory-policy/nfsmounts.py debian/univention-base-files/usr/lib/univention-directory-policy/nfsmounts
-	mv debian/univention-base-files/usr/lib/univention-directory-policy/univention-policy-update-config-registry.py debian/univention-base-files/usr/lib/univention-directory-policy/univention-policy-update-config-registry
 	mkdir -p debian/univention-base-files/etc/univention/templates/scripts/etc
 	ln -s /usr/sbin/locale-gen debian/univention-base-files/etc/univention/templates/scripts/etc/locale.gen
-
-override_dh_fixperms:
-	dh_fixperms
-	chmod 755 debian/univention-base-files/usr/lib/univention-directory-policy/nfsmounts
-	chmod 755 debian/univention-base-files/usr/lib/univention-directory-policy/univention-policy-update-config-registry
 
 override_dh_installinit: ; # BUG: install -p -m755 debian/univention-config-registry.univention-config-registry debian/univention-config-registry/etc/init.d/univention-config-registry
