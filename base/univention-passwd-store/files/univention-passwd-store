@@ -51,9 +51,7 @@ test -d "$PASSWDDIR" || mkdir "$PASSWDDIR"
 chown "$USER":nogroup "$PASSWDDIR"
 chmod 0100 "$PASSWDDIR"
 
-if [ -e "$PASSWDFILE"]; then
-	rm -f "$PASSWDFILE"
-fi
+rm -f "$PASSWDFILE"
 
 # prepare file
 touch "$PASSWDFILE"
@@ -67,4 +65,3 @@ echo -n "$PASSWD" > "$PASSWDFILE"
 chmod 0400 "$PASSWDFILE"
 
 exit 0
-
