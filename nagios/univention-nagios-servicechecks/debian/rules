@@ -35,12 +35,5 @@ override_dh_auto_install:
 	univention-install-config-registry
 	univention-install-config-registry-info
 
-override_dh_fixperms:
-	dh_fixperms
-	chmod +x debian/univention-nagios-cups/usr/lib/nagios/plugins/check_univention_cups
-	chmod +x debian/univention-nagios-squid/usr/lib/nagios/plugins/check_univention_squid
-	chmod +x debian/univention-nagios-dansguardian/usr/lib/nagios/plugins/check_univention_dansguardian
-	chmod +x debian/univention-nagios-opsi/usr/lib/nagios/plugins/check_univention_opsi
-
 %:
 	dh $@
