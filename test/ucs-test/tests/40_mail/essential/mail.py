@@ -151,7 +151,7 @@ class ImapMail(Mail):
 		s.connect((hostname, 143))
 		retval = self.send_and_receive_quota(s, 'a001', 'login %s %s\r\n' % (username, password))
 		retval = self.send_and_receive_quota(s, 'a002', 'GETQUOTAROOT INBOX\r\n')  # user/%s\r\n' % username)
-		regex = '\(STORAGE 0 (.*)\)'
+		regex = r'\(STORAGE 0 (.*)\)'
 		m = re.search(regex, retval[1])
 		try:
 			quota = int(m.group(1))
@@ -706,7 +706,7 @@ Regards,
 	mimemsg.attach(MIMEText(m_msg))
 
 	if virus:
-		mimemsg.attach(MIMEText('X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'))
+		mimemsg.attach(MIMEText(r'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'))
 
 	for fn in attachments:
 		part = MIMEBase('application', "octet-stream")

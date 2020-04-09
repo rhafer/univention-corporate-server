@@ -150,7 +150,7 @@ class Value(object):
 
     def is_arch(self):
         ALLOWED = set(('amd64', 'i386'))
-        if set(re.split('\s*,\s*', self.value)) - ALLOWED:
+        if set(re.split(r'\s*,\s*', self.value)) - ALLOWED:
             raise Error('Invalid architectures: "%s"' % self.value)
 
     def is_capacity(self):

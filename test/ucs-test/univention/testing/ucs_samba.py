@@ -108,7 +108,7 @@ def get_available_s4connector_dc():
 	if not stdout:
 		print("WARNING: Automatic S4 Connector host detection failed")
 		return
-	matches = re.compile('^uid: (.*)\$$', re.M).findall(stdout)
+	matches = re.compile(r'^uid: (.*)\$$', re.M).findall(stdout)
 	if len(matches) == 1:
 		return matches[0]
 	elif len(matches) == 0:

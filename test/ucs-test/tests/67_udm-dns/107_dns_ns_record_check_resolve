@@ -48,7 +48,7 @@ if __name__ == '__main__':
 		if p1.returncode != 0:
 			utils.fail("DNS dig query failed")
 
-		found = [x for x in nameservers if re.search("^%s\.[ \t][0-9]+[ \t]IN\tNS\t%s\." % (zone_fqdn, x), stdout, re.MULTILINE)]
+		found = [x for x in nameservers if re.search(r"^%s\.[ \t][0-9]+[ \t]IN\tNS\t%s\." % (zone_fqdn, x), stdout, re.MULTILINE)]
 
 		if nameservers != found:
 			utils.fail("Record not found: %s" % ([set(nameservers) - set(found)],))
