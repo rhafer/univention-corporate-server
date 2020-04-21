@@ -412,7 +412,7 @@ class SAMLUser(object):
 		return self.time_remaining < 0
 
 
-traceback_pattern = re.compile('(Traceback.*most recent call|File.*line.*in.*\d)')
+traceback_pattern = re.compile(r'(Traceback.*most recent call|File.*line.*in.*\d)')
 
 
 @log_exceptions

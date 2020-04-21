@@ -69,7 +69,7 @@ for i in range(0, len(res_pA)):
 	if 'objectClass' in res_pA[i][1]:
 		if 'krb5KDCEntry' in res_pA[i][1]['objectClass']:
 			if 'userPassword' in res_pA[i][1]:
-				_re = re.compile('^\{crypt\}!.*$')
+				_re = re.compile(r'^\{crypt\}!.*$')
 				disabled = _re.match(res_pA[i][1]['userPassword'][0])
 				if 'krb5KDCFlags' in res_pA[i][1]:
 					if disabled and not res_pA[i][1]['krb5KDCFlags'][0] == '254':

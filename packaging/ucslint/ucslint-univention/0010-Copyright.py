@@ -84,14 +84,14 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 				check_files.append(fn)
 
 		# looking for python files
-		for fn in uub.FilteredDirWalkGenerator(path, reHashBang=re.compile('^#!'), readSize=100):
+		for fn in uub.FilteredDirWalkGenerator(path, reHashBang=re.compile(r'^#!'), readSize=100):
 			check_files.append(fn)
 
 		# Copyright (C) 2004-2020 Univention GmbH
 		# Copyright (C) 2004-2020 Univention GmbH
 		# Copyright 2008 by
 		# Copyright: 2004-2020 Univention GmbH
-		reCopyrightVersion = re.compile('Copyright(?:\s+\(C\)|:)?\s+([0-9, -]+)\s+(?:by|Univention\s+GmbH)')
+		reCopyrightVersion = re.compile(r'Copyright(?:\s+\(C\)|:)?\s+([0-9, -]+)\s+(?:by|Univention\s+GmbH)')
 
 		# check files for copyright
 		for fn in check_files:

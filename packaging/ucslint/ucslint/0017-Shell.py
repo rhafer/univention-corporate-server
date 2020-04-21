@@ -34,7 +34,7 @@ except ImportError:
 	import ucslint.base as uub
 import re
 
-reHashBang = re.compile('#!\s*/bin/(?:ba|da|z|c)?sh')
+reHashBang = re.compile(r'#!\s*/bin/(?:ba|da|z|c)?sh')
 
 
 def containsHashBang(path):

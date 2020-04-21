@@ -940,8 +940,8 @@ class AD_Takeover(object):
 		log.info("Starting Samba domain join.")
 		t = time.time()
 		p = subprocess.Popen(["samba-tool", "domain", "join", self.ucr["domainname"], "DC", "-U%s%%%s" % (self.AD.username, self.AD.password), "--realm=%s" % self.ucr["kerberos/realm"], "--machinepass=%s" % machine_secret, "--server=%s" % self.ad_server_fqdn, "--site=%s" % self.AD.domain_info["ad_server_site"]], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-		RE_SCHEMA = re.compile("^Schema-DN\[(?P<partition_dn>[^\]]+)\] objects\[([^\]]+)\] linked_values\[([^\]]+)\]$")
-		RE_PARTITION = re.compile("^Partition\[(?P<partition_dn>[^\]]+)\] objects\[([^\]]+)\] linked_values\[([^\]]+)\]$")
+		RE_SCHEMA = re.compile(r"^Schema-DN\[(?P<partition_dn>[^\]]+)\] objects\[([^\]]+)\] linked_values\[([^\]]+)\]$")
+		RE_PARTITION = re.compile(r"^Partition\[(?P<partition_dn>[^\]]+)\] objects\[([^\]]+)\] linked_values\[([^\]]+)\]$")
 		domain_dn = self.AD.samdb.domain_dn()
 		part_started = ''
 		while p.poll() is None:

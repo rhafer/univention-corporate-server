@@ -87,7 +87,7 @@ password_charsets = [
 	'abcdefghijklmnopqrstuvwxyz',
 	'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 	'0123456789',
-	'^!\$%&/()=?{[]}+~#-_.:,;<>|\\',
+	'^!$%&/()=?{[]}+~#-_.:,;<>|\\',
 ]
 
 

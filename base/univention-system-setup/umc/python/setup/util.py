@@ -368,12 +368,12 @@ class ProgressState(object):
 
 class ProgressParser(object):
 	# regular expressions
-	NAME = re.compile('^__NAME__: *(?P<key>[^ ]*) (?P<name>.*)\n$')
-	MSG = re.compile('^__MSG__: *(?P<message>.*)\n$')
-	STEPS = re.compile('^__STEPS__: *(?P<steps>.*)\n$')
-	STEP = re.compile('^__STEP__: *(?P<step>.*)\n$')
-	JOINERROR = re.compile('^__JOINERR__: *(?P<error_message>.*)\n$')
-	ERROR = re.compile('^__ERR__: *(?P<error_message>.*)\n$')
+	NAME = re.compile(r'^__NAME__: *(?P<key>[^ ]*) (?P<name>.*)\n$')
+	MSG = re.compile(r'^__MSG__: *(?P<message>.*)\n$')
+	STEPS = re.compile(r'^__STEPS__: *(?P<steps>.*)\n$')
+	STEP = re.compile(r'^__STEP__: *(?P<step>.*)\n$')
+	JOINERROR = re.compile(r'^__JOINERR__: *(?P<error_message>.*)\n$')
+	ERROR = re.compile(r'^__ERR__: *(?P<error_message>.*)\n$')
 
 	# fractions of setup scripts
 	FRACTIONS = {
@@ -634,7 +634,7 @@ def run_joinscript(progressParser, values, _username, password, dcname=None, lan
 
 		with _temporary_password_file(password) as password_file:
 			# sanitize username
-			reg = re.compile('[^ a-zA-Z_1-9-]')
+			reg = re.compile(r'[^ a-zA-Z_1-9-]')
 			username = reg.sub('_', _username)
 
 			# run join scripts without the cleanup scripts
@@ -843,7 +843,7 @@ def is_hostname(hostname):
 	return is_hostname.RE.match(hostname) is not None
 
 
-is_hostname.RE = re.compile("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$", re.IGNORECASE)
+is_hostname.RE = re.compile(r"^[a-z0-9]([a-z0-9-]*[a-z0-9])?$", re.IGNORECASE)
 
 
 def is_domainname(domainname):
@@ -899,7 +899,7 @@ def is_domaincontroller(domaincontroller):
 	return is_domaincontroller.RE.match(domaincontroller) is not None
 
 
-is_domaincontroller.RE = re.compile("^[a-zA-Z].*\..*$")
+is_domaincontroller.RE = re.compile(r"^[a-zA-Z].*\..*$")
 
 
 def is_ldap_base(ldap_base):
@@ -923,7 +923,7 @@ def is_ldap_base(ldap_base):
 	return match is not None and not any(part.upper().startswith('C=') and not part.upper()[2:] in is_ldap_base.CC for part in ldap.dn.explode_dn(ldap_base))
 
 
-is_ldap_base.RE = re.compile('^(c=[A-Za-z]{2}|(dc|cn|o|l)=[a-zA-Z0-9-]+)(,(c=[A-Za-z]{2}|((dc|cn|o|l)=[a-zA-Z0-9-]+)))+$')
+is_ldap_base.RE = re.compile(r'^(c=[A-Za-z]{2}|(dc|cn|o|l)=[a-zA-Z0-9-]+)(,(c=[A-Za-z]{2}|((dc|cn|o|l)=[a-zA-Z0-9-]+)))+$')
 is_ldap_base.CC = ['AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW']
 
 # new defined methods

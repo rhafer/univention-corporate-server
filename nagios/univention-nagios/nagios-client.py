@@ -65,9 +65,9 @@ def readPluginConfig():
 				fp = open(os.path.join(__pluginconfdir, fn), 'r')
 				content = fp.read()
 				fp.close()
-				for cmddef in re.split('\s*define\s+command\s*\{', content):
-					mcmdname = re.search('^\s+command_name\s+(.*?)\s*$', cmddef, re.MULTILINE)
-					mcmdline = re.search('^\s+command_line\s+(.*?)\s*$', cmddef, re.MULTILINE)
+				for cmddef in re.split(r'\s*define\s+command\s*\{', content):
+					mcmdname = re.search(r'^\s+command_name\s+(.*?)\s*$', cmddef, re.MULTILINE)
+					mcmdline = re.search(r'^\s+command_line\s+(.*?)\s*$', cmddef, re.MULTILINE)
 					if mcmdname and mcmdline:
 						__pluginconfig[mcmdname.group(1)] = mcmdline.group(1)
 						univention.debug.debug(univention.debug.LISTENER, univention.debug.INFO, 'NAGIOS-CLIENT: read configline for plugin %s ==> %s' % (mcmdname.group(1), mcmdline.group(1)))
@@ -78,9 +78,9 @@ def readPluginConfig():
 def replaceArguments(cmdline, args):
 	for i in range(9):
 		if i < len(args):
-			cmdline = re.sub('\$ARG%s\$' % (i + 1), args[i], cmdline)
+			cmdline = re.sub(r'\$ARG%s\$' % (i + 1), args[i], cmdline)
 		else:
-			cmdline = re.sub('\$ARG%s\$' % (i + 1), '', cmdline)
+			cmdline = re.sub(r'\$ARG%s\$' % (i + 1), '', cmdline)
 	return cmdline
 
 
@@ -105,8 +105,8 @@ def writeConfig(fqdn, new):
 			cmdline = __pluginconfig[new['univentionNagiosCheckCommand'][0]]
 	if 'univentionNagiosCheckArgs' in new and new['univentionNagiosCheckArgs'] and new['univentionNagiosCheckArgs'][0]:
 		cmdline = replaceArguments(cmdline, new['univentionNagiosCheckArgs'][0].split('!'))
-	cmdline = re.sub('\$HOSTADDRESS\$', fqdn, cmdline)
-	cmdline = re.sub('\$HOSTNAME\$', fqdn, cmdline)
+	cmdline = re.sub(r'\$HOSTADDRESS\$', fqdn, cmdline)
+	cmdline = re.sub(r'\$HOSTNAME\$', fqdn, cmdline)
 
 	listener.setuid(0)
 	try:

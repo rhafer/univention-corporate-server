@@ -127,8 +127,8 @@ class CertificateVerifier(object):
 		# Universal time (UTC time) only. ``YYYYMMDDHH[MM[SS[.fff]]]Z''.
 		# Difference between local and UTC times. ``YYYYMMDDHH[MM[SS[.fff]]]+-HHMM''.
 
-		sans_mircoseconds = re.sub('\.\d{3}', '', generalized_time)
-		sans_difference = re.sub('[+-]\d{4}', '', sans_mircoseconds)
+		sans_mircoseconds = re.sub(r'\.\d{3}', '', generalized_time)
+		sans_difference = re.sub(r'[+-]\d{4}', '', sans_mircoseconds)
 		date_format = {
 			10: '%Y%m%d%H', 12: '%Y%m%d%H%M', 14: '%Y%m%d%H%M%S',
 			11: '%Y%m%d%HZ', 13: '%Y%m%d%H%MZ', 15: '%Y%m%d%H%M%SZ',
@@ -138,7 +138,7 @@ class CertificateVerifier(object):
 			raise ValueError('Unparsable generalized_time {!r}'.format(generalized_time))
 
 		date = datetime.datetime.strptime(sans_mircoseconds, date_format)
-		utc_difference = re.search('([+-])(\d{2})(\d{2})', sans_mircoseconds)
+		utc_difference = re.search(r'([+-])(\d{2})(\d{2})', sans_mircoseconds)
 
 		if sans_mircoseconds.endswith('Z'):
 			return date.replace(tzinfo=dateutil.tz.tzutc())

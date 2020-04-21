@@ -347,7 +347,7 @@ class DovecotSharedFolderListener(DovecotListener):
 
 	def get_public_location(self, ns):  # type: (str) -> str
 		try:
-			pub_loc = self.read_from_ext_proc_as_root(["/usr/bin/doveconf", "-h", "namespace/" + ns + "/location"], "maildir:(\S+):INDEXPVT.*")
+			pub_loc = self.read_from_ext_proc_as_root(["/usr/bin/doveconf", "-h", "namespace/" + ns + "/location"], r"maildir:(\S+):INDEXPVT.*")
 		except:
 			self.log_e("Failed to get location of public folder '%s' from Dovecot configuration.\n%s" % (ns, traceback.format_exc()))
 			raise

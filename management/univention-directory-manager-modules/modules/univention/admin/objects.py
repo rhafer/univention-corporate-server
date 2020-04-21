@@ -53,7 +53,7 @@ def module(object):
 	if hasattr(object, 'module'):
 		return object.module
 	else:
-		res = re.findall('^<.?univention.admin.handlers.(.+)\.[^\. ]+ .*>$', str(object))
+		res = re.findall(r'^<.?univention.admin.handlers.(.+)\.[^\. ]+ .*>$', str(object))
 		if len(res) != 1:
 			return None
 		else:

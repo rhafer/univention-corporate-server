@@ -56,8 +56,8 @@ if output.endswith('.pyo'):
 else:
 	output_pp = open(output, 'w')
 
-ifdef_pattern = re.compile('^#ifdef (.*)')
-endif_pattern = re.compile('^#endif *(/\*.*\*/)*')
+ifdef_pattern = re.compile(r'^#ifdef (.*)')
+endif_pattern = re.compile(r'^#endif *(/\*.*\*/)*')
 
 hide_depth = 0
 depth = 0

@@ -235,7 +235,7 @@ class AppListAttribute(AppAttribute):
 		if value == '':
 			value = None
 		if isinstance(value, basestring):
-			value = re.split('\s*,\s*', value)
+			value = re.split(r'\s*,\s*', value)
 		if value is None:
 			value = []
 		return value
@@ -905,9 +905,9 @@ class App(object):
 	automatic_schema_creation = AppBooleanAttribute(default=True)
 	docker_env_ldap_user = AppAttribute()
 
-	ports_exclusive = AppListAttribute(regex='^\d+$')
-	ports_redirection = AppListAttribute(regex='^\d+:\d+$')
-	ports_redirection_udp = AppListAttribute(regex='^\d+:\d+$')
+	ports_exclusive = AppListAttribute(regex=r'^\d+$')
+	ports_redirection = AppListAttribute(regex=r'^\d+:\d+$')
+	ports_redirection_udp = AppListAttribute(regex=r'^\d+:\d+$')
 
 	server_role = AppListAttribute(default=['domaincontroller_master', 'domaincontroller_backup', 'domaincontroller_slave', 'memberserver'], choices=['domaincontroller_master', 'domaincontroller_backup', 'domaincontroller_slave', 'memberserver'])
 	supported_architectures = AppListAttribute(default=['amd64', 'i386'], choices=['amd64', 'i386'])

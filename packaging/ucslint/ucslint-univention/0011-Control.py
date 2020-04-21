@@ -84,7 +84,7 @@ class UniventionPackageCheck(uub.UniventionPackageCheckDebian):
 			return
 
 		# compare package name
-		reChangelogPackage = re.compile('^([a-z0-9.-]+) \((.*?)\) (.*?)\n')
+		reChangelogPackage = re.compile(r'^([a-z0-9.-]+) \((.*?)\) (.*?)\n')
 		match = reChangelogPackage.match(content_changelog)
 		if match:
 			srcpkgname = match.group(1)

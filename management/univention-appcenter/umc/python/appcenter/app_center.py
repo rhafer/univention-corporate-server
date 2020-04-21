@@ -294,7 +294,7 @@ class ApplicationMetaClass(type):
 
 class Application(object):
 	__metaclass__ = ApplicationMetaClass
-	_reg_comma = re.compile('\s*,\s*')
+	_reg_comma = re.compile(r'\s*,\s*')
 	_reg_component_id = re.compile(r'.*/(?P<id>[^/]+)\.ini')
 	_all_applications = None
 	_category_translations = None

@@ -55,7 +55,7 @@ _ = umc.Translation('univention-management-console-module-join').translate
 
 CMD_ENABLE_EXEC = ['/usr/share/univention-updater/enable-apache2-umc', '--no-restart']
 CMD_DISABLE_EXEC = ['/usr/share/univention-updater/disable-apache2-umc', '--exclude-apache']
-RE_HOSTNAME = re.compile('^[a-z]([a-z0-9-]*[a-z0-9])*(\.([a-z0-9]([a-z0-9-]*[a-z0-9])*[.])*[a-z0-9]([a-z0-9-]*[a-z0-9])*)?$')
+RE_HOSTNAME = re.compile(r'^[a-z]([a-z0-9-]*[a-z0-9])*(\.([a-z0-9]([a-z0-9-]*[a-z0-9])*[.])*[a-z0-9]([a-z0-9-]*[a-z0-9])*)?$')
 
 
 def get_master_dns_lookup():
@@ -195,9 +195,9 @@ def run(cmd, stepsPerScript, info_handler=_dummyFunc, error_handler=_dummyFunc, 
 
 	try:
 		# regular expressions for output parsing
-		regError = re.compile('^\* Message:\s*(?P<message>.*)\s*$')
-		regJoinScript = re.compile('(Configure|Running)\s+(?P<script>.*)\.inst.*$')
-		regInfo = re.compile('^(?P<message>.*?)\s*:?\s*\x1b.*$')
+		regError = re.compile(r'^\* Message:\s*(?P<message>.*)\s*$')
+		regJoinScript = re.compile(r'(Configure|Running)\s+(?P<script>.*)\.inst.*$')
+		regInfo = re.compile(r'^(?P<message>.*?)\s*:?\s*\x1b.*$')
 
 		# call to univention-join
 		MODULE.info('calling "%s"' % ' '.join(cmd))
@@ -268,9 +268,9 @@ def run(cmd, stepsPerScript, info_handler=_dummyFunc, error_handler=_dummyFunc, 
 INSTDIR = '/usr/lib/univention-install'
 LOGFILE = '/var/log/univention/join.log'
 LOCKFILE = '/var/lock/univention_umc_join.lock'
-RE_JOINFILE = re.compile('^(?P<script>(?P<prio>\d\d)(?P<name>.+))\.(inst|uinst)$')
-RE_NOT_CONFIGURED = re.compile("^Warning: '([^']+)' is not configured.$")
-RE_ERROR = re.compile('^Error: (.*?)$')
+RE_JOINFILE = re.compile(r'^(?P<script>(?P<prio>\d\d)(?P<name>.+))\.(inst|uinst)$')
+RE_NOT_CONFIGURED = re.compile(r"^Warning: '([^']+)' is not configured.$")
+RE_ERROR = re.compile(r'^Error: (.*?)$')
 
 
 class Instance(Base):
@@ -456,7 +456,7 @@ class Instance(Base):
 		scripts, username, password, force = (request.options['scripts'], request.options.get('username'), request.options.get('password'), request.options.get('force', False))
 
 		# sort scripts
-		scripts.sort(key=lambda i: int(re.match('^(\d+)', i).group()))
+		scripts.sort(key=lambda i: int(re.match(r'^(\d+)', i).group()))
 
 		def _thread():
 			# reset progress state and lock against other join processes

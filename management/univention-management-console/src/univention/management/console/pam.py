@@ -101,8 +101,8 @@ class PamAuth(object):
 			'Unable to reach any changepw server  in realm %s'
 		],
 		'The password is too short.': [
-			re.compile('Password too short, password must be at least (?P<minlen>\d+) characters long.', re.I),
-			re.compile('^Password too short$'),
+			re.compile(r'Password too short, password must be at least (?P<minlen>\d+) characters long.', re.I),
+			re.compile(r'^Password too short$'),
 			'You must choose a longer password'
 			'Password Too Short',
 			'Password is too short',
@@ -154,8 +154,8 @@ class PamAuth(object):
 			u'Schlechtes Passwort: Es basiert auf einem Wörterbucheintrag'.encode('latin-1'),
 		],
 		'The password was already used.': [
-			re.compile('Password is already in password history. New password must not match any of your (?P<history>\d+) previous passwords.', re.I),
-			re.compile('^Password is already in password history$'),
+			re.compile(r'Password is already in password history. New password must not match any of your (?P<history>\d+) previous passwords.', re.I),
+			re.compile(r'^Password is already in password history$'),
 			': Password already used',
 			'Bad: new password must be different than the old one',
 			'Password already used',

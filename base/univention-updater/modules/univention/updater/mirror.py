@@ -186,7 +186,7 @@ class UniventionMirror(UniventionUpdater):
         """
         result = []
         repobase = os.path.join(self.repository_path, 'mirror')
-        RErepo = re.compile('^%s/(\d+[.]\d)/(maintained|unmaintained)/(\d+[.]\d+-\d+)$' % (re.escape(repobase),))
+        RErepo = re.compile(r'^%s/(\d+[.]\d)/(maintained|unmaintained)/(\d+[.]\d+-\d+)$' % (re.escape(repobase),))
         for dirname, subdirs, files in os.walk(repobase):
             match = RErepo.match(dirname)
             if match:

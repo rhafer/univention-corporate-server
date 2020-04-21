@@ -1023,7 +1023,7 @@ class PackageManager(object):
 
 		All strings which must pass this function are in: <https://forge.univention.org/bugzilla/attachment.cgi?id=6898>
 		"""
-		messages = re.sub('\s([WE]:)', r'\n\1', str(exc)).splitlines()
+		messages = re.sub(r'\s([WE]:)', r'\n\1', str(exc)).splitlines()
 		further = set()  # type: Set[str]
 
 		apt_update = False
@@ -1042,7 +1042,7 @@ class PackageManager(object):
 				if 'pkgProblemResolver::Resolve' in msg:
 					hold_package = True
 					continue
-				match = re.search(' - (write|open|rename) \((\d+): .*\)', msg)
+				match = re.search(r' - (write|open|rename) \((\d+): .*\)', msg)
 				if match:
 					type_, errno = match.groups()
 					errno = int(errno)

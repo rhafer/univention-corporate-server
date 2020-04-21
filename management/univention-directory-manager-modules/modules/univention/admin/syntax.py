@@ -448,7 +448,7 @@ class UDM_Objects(ISyntax):
 	"""Either 'dn' or the |UDM| property name enclosed in %()s to use as the value for this syntax class."""
 	label = None
 	"""The |UDM| property name, which is used as the displayed value."""
-	regex = re.compile('^([^=,]+=[^=,]+,)*[^=,]+=[^=,]+$')
+	regex = re.compile(r'^([^=,]+=[^=,]+,)*[^=,]+=[^=,]+$')
 	"""Regular expression for validating the values."""
 	static_values = None  # type: Optional[Sequence[Tuple[str, str]]]
 	"""Sequence of additional static items."""
@@ -646,7 +646,7 @@ class DebianPackageVersion(string):
 	"""
 	Syntax for a Debian package version.
 	"""
-	invalid_chars_regex = re.compile('[^-+:.0-9a-zA-Z~]')
+	invalid_chars_regex = re.compile(r'[^-+:.0-9a-zA-Z~]')
 
 	@classmethod
 	def parse(self, value):
@@ -916,7 +916,7 @@ class integer(simple):
 	"""
 	min_length = 1
 	max_length = 0
-	_re = re.compile('^[0-9]+$')
+	_re = re.compile(r'^[0-9]+$')
 	size = 'Half'
 
 	type_class = univention.admin.types.IntegerType
@@ -978,7 +978,7 @@ class boolean(simple):
 	"""
 	min_length = 1
 	max_length = 1
-	regex = re.compile('^[01]?$')
+	regex = re.compile(r'^[01]?$')
 	error_message = _("Value must be 0 or 1")
 
 	type_class = univention.admin.types.BooleanType
@@ -1042,7 +1042,7 @@ class filesize(simple):
 	"""
 	min_length = 1
 	max_length = 0
-	regex = re.compile('^[0-9]+(|[gGmMkK])(|[bB])$')
+	regex = re.compile(r'^[0-9]+(|[gGmMkK])(|[bB])$')
 	error_message = _("Value must be an integer followed by one of GB,MB,KB,B or nothing (equals B)!")
 
 
@@ -1147,7 +1147,7 @@ class string_numbers_letters_dots(simple):
 	valueError:
 	"""
 
-	regex = re.compile('(?u)(^[a-zA-Z0-9])[a-zA-Z0-9._-]*([a-zA-Z0-9]$)')
+	regex = re.compile(r'(?u)(^[a-zA-Z0-9])[a-zA-Z0-9._-]*([a-zA-Z0-9]$)')
 	error_message = _('Value must not contain anything other than digits, letters or dots, must be at least 2 characters long, and start and end with a digit or letter!')
 
 
@@ -1200,7 +1200,7 @@ class string_numbers_letters_dots_spaces(simple):
 	valueError:
 	"""
 
-	regex = re.compile('(?u)(^[a-zA-Z0-9])[a-zA-Z0-9._ -]*([a-zA-Z0-9]$)')
+	regex = re.compile(r'(?u)(^[a-zA-Z0-9])[a-zA-Z0-9._ -]*([a-zA-Z0-9]$)')
 	error_message = _("Value must not contain anything other than digits, letters, dots or spaces, must be at least 2 characters long, and start and end with a digit or letter!")
 
 
@@ -1221,7 +1221,7 @@ class phone(simple):
 	"""
 	min_length = 1
 	max_length = 16
-	regex = re.compile('(?u)[a-zA-Z0-9._ ()\\\/+-]*$')
+	regex = re.compile(r'(?u)[a-zA-Z0-9._ ()/+-]*$')
 	error_message = _("Value must not contain anything other than digits, letters, dots, brackets, slash, plus, or minus!")
 
 
@@ -1295,7 +1295,7 @@ class uid(simple):
 	"""
 	min_length = 1
 	max_length = 16
-	regex = re.compile('(?u)(^[a-zA-Z0-9])[a-zA-Z0-9._-]*([a-zA-Z0-9]$)')
+	regex = re.compile(r'(?u)(^[a-zA-Z0-9])[a-zA-Z0-9._-]*([a-zA-Z0-9]$)')
 	# FIXME: (?!admin)
 	error_message = _("Value must not contain anything other than digits, letters, dots, dash or underscore, must be at least 2 characters long, must start and end with a digit or letter, and must not be admin!")
 
@@ -1307,7 +1307,7 @@ class uid_umlauts(simple):
 	name = 'uid'
 	min_length = 1
 	max_length = 16
-	_re = re.compile('(?u)(^\w[\w -.]*\w$)|\w*$')
+	_re = re.compile(r'(?u)(^\w[\w -.]*\w$)|\w*$')
 
 	@classmethod
 	def parse(self, text):
@@ -1325,7 +1325,7 @@ class uid_umlauts_lower_except_first_letter(simple):
 	"""
 	min_length = 1
 	max_length = 16
-	_re = re.compile('(?u)(^\w[\w -.]*\w$)|\w*$')
+	_re = re.compile(r'(?u)(^\w[\w -.]*\w$)|\w*$')
 
 	@classmethod
 	def parse(self, text):
@@ -1364,7 +1364,7 @@ class sharePath(simple):
 	* :file:`/sys/`
 	* :file:`/tmp/`
 	"""
-	regex = re.compile('^([^"])+$')
+	regex = re.compile(r'^([^"])+$')
 	error_message = _('Value may not contain double quotes (")!')
 
 	@classmethod
@@ -1737,7 +1737,7 @@ class absolutePath(simple):
 	"""
 	min_length = 1
 	max_length = 0
-	_re = re.compile('^/.*')
+	_re = re.compile(r'^/.*')
 
 	@classmethod
 	def parse(self, text):
@@ -1839,7 +1839,7 @@ class iso8601Date(simple):
 	with the dashes being optional
 	"""
 	# regexp-source: http://regexlib.com/REDetails.aspx?regexp_id=2092
-	regex = re.compile('^(\d{4}(?:(?:(?:\-)?(?:00[1-9]|0[1-9][0-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-6]))?|(?:(?:\-)?(?:1[0-2]|0[1-9]))?|(?:(?:\-)?(?:1[0-2]|0[1-9])(?:\-)?(?:0[1-9]|[12][0-9]|3[01]))?|(?:(?:\-)?W(?:0[1-9]|[1-4][0-9]|5[0-3]))?|(?:(?:\-)?W(?:0[1-9]|[1-4][0-9]|5[0-3])(?:\-)?[1-7])?)?)$')
+	regex = re.compile(r'^(\d{4}(?:(?:(?:\-)?(?:00[1-9]|0[1-9][0-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-6]))?|(?:(?:\-)?(?:1[0-2]|0[1-9]))?|(?:(?:\-)?(?:1[0-2]|0[1-9])(?:\-)?(?:0[1-9]|[12][0-9]|3[01]))?|(?:(?:\-)?W(?:0[1-9]|[1-4][0-9]|5[0-3]))?|(?:(?:\-)?W(?:0[1-9]|[1-4][0-9]|5[0-3])(?:\-)?[1-7])?)?)$')
 	error_message = _("The given date does not conform to iso8601, example: \"2009-01-01\".")
 
 	type_class = univention.admin.types.DateType
@@ -1902,8 +1902,8 @@ class date(simple):
 	name = 'date'
 	min_length = 5
 	max_length = 0
-	_re_iso = re.compile('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
-	_re_de = re.compile('^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]+$')
+	_re_iso = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+	_re_de = re.compile(r'^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]+$')
 
 	type_class = univention.admin.types.DateType
 
@@ -2228,7 +2228,7 @@ class unixTime(simple):
 	"""
 	Syntax for a UNIX time stamp - seconds since 1970-01-01.
 	"""
-	regex = re.compile('^[0-9]+$')
+	regex = re.compile(r'^[0-9]+$')
 	error_message = _("Not a valid time format")
 
 	type_class = univention.admin.types.DateTimeType
@@ -2257,7 +2257,7 @@ class TimeString(simple):
 	'23:59:59'
 	"""
 	error_message = _("Not a valid time format")
-	regex = re.compile('^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$')
+	regex = re.compile(r'^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$')
 
 	type_class = univention.admin.types.TimeType
 
@@ -2451,7 +2451,7 @@ class ldapDn(simple):
 	.. deprecated:: 3.1-0
 		Use :py:class:`UDM_Objects`.
 	"""
-	regex = re.compile('^([^=,]+=[^=,]+,)*[^=,]+=[^=,]+$')
+	regex = re.compile(r'^([^=,]+=[^=,]+,)*[^=,]+=[^=,]+$')
 	error_message = _("Not a valid LDAP DN")
 
 	type_class = univention.admin.types.DistinguishedNameType
@@ -2519,7 +2519,7 @@ class UserMailAddress(UDM_Objects):
 	udm_filter = '(mailPrimaryAddress=*)'
 	key = '%(mailPrimaryAddress)s'
 	static_values = (('anyone', _('Anyone')), )
-	regex = re.compile('^([^\s]+@[^\s]+|anyone)$')
+	regex = re.compile(r'^([^\s]+@[^\s]+|anyone)$')
 	error_message = _('Not a valid e-mail address')
 
 
@@ -2529,7 +2529,7 @@ class GroupName(UDM_Objects):
 	"""
 	udm_modules = ('groups/group', )
 	key = '%(name)s'
-	regex = re.compile('^.+$')
+	regex = re.compile(r'^.+$')
 	simple = True
 	use_objects = False
 
@@ -2540,7 +2540,7 @@ class UserName(UDM_Objects):
 	"""
 	udm_modules = ('users/user', )
 	key = '%(username)s'
-	regex = re.compile('^.+$')
+	regex = re.compile(r'^.+$')
 	simple = True
 	use_objects = False
 
@@ -2593,7 +2593,7 @@ class ldapDnOrNone(simple):
 	.. deprecated:: 3.1-0
 		Use :py:class:`UDM_Objects`.
 	"""
-	_re = re.compile('^([^=,]+=[^=,]+,)*[^=,]+=[^=,]+$')
+	_re = re.compile(r'^([^=,]+=[^=,]+,)*[^=,]+=[^=,]+$')
 
 	@classmethod
 	def parse(self, text):
@@ -2648,7 +2648,7 @@ class XResolution(simple):
 	"""
 	Syntax to enter display resolution for X11.
 	"""
-	regex = re.compile('^[0-9]+x[0-9]+$')
+	regex = re.compile(r'^[0-9]+x[0-9]+$')
 	error_message = _("Value consists of two integer numbers separated by an \"x\" (e.g. \"1024x768\")")
 
 
@@ -2656,7 +2656,7 @@ class XSync(simple):
 	"""
 	Syntax to enter display timing settings for X11.
 	"""
-	regex = re.compile('^[0-9]+(-[0-9]+)?( +[0-9]+(-[0-9]+)?)*$')
+	regex = re.compile(r'^[0-9]+(-[0-9]+)?( +[0-9]+(-[0-9]+)?)*$')
 	error_message = _("Value consists of two integer numbers separated by a \"-\" (e.g. \"30-70\")")
 
 
@@ -2664,7 +2664,7 @@ class XColorDepth(simple):
 	"""
 	Syntax to enter color depth for X11.
 	"""
-	regex = re.compile('^[0-9]+$')
+	regex = re.compile(r'^[0-9]+$')
 
 
 class XModule(select):
@@ -3055,7 +3055,7 @@ class UserID(UDM_Objects):
 	udm_modules = ('users/user', )
 	key = '%(uidNumber)s'
 	label = '%(username)s'
-	regex = re.compile('^[0-9]+$')
+	regex = re.compile(r'^[0-9]+$')
 	static_values = (('0', 'root'), )
 	use_objects = False
 
@@ -3079,7 +3079,7 @@ class GroupID(UDM_Objects):
 	udm_modules = ('groups/group', )
 	key = '%(gidNumber)s'
 	label = '%(name)s'
-	regex = re.compile('^[0-9]+$')
+	regex = re.compile(r'^[0-9]+$')
 	static_values = (('0', 'root'), )
 	use_objects = False
 
@@ -3111,7 +3111,7 @@ class IComputer_FQDN(UDM_Objects):
 	udm_modules = ()
 	key = '%(name)s.%(domain)s'  # '%(fqdn)s' optimized for LDAP lookup. Has to be in sync with the computer handlers' info['fqdn']
 	label = '%(name)s.%(domain)s'  # '%(fqdn)s'
-	regex = re.compile('(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z0-9]{2,})$)')  # '(^[a-zA-Z])(([a-zA-Z0-9-_]*)([a-zA-Z0-9]$))?$' )
+	regex = re.compile(r'(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z0-9]{2,})$)')  # '(^[a-zA-Z])(([a-zA-Z0-9-_]*)([a-zA-Z0-9]$))?$' )
 	error_message = _('Not a valid FQDN')
 	udm_filter = '!(univentionObjectFlag=docker)'
 	simple = True
@@ -4533,7 +4533,7 @@ class languageCode(string):
 	"""
 	min_length = 5
 	max_length = 5
-	_re = re.compile('^[a-z][a-z]_[A-Z][A-Z]$')
+	_re = re.compile(r'^[a-z][a-z]_[A-Z][A-Z]$')
 
 	@classmethod
 	def parse(self, text):
@@ -4638,7 +4638,7 @@ class PrinterNames(UDM_Objects):
 	depends = 'spoolHost'
 	simple = True
 	key = '%(name)s'
-	regex = re.compile('(?u)(^[a-zA-Z0-9])[a-zA-Z0-9_-]*([a-zA-Z0-9]$)')
+	regex = re.compile(r'(?u)(^[a-zA-Z0-9])[a-zA-Z0-9_-]*([a-zA-Z0-9]$)')
 
 	@classmethod
 	def udm_filter(self, options):
@@ -4687,7 +4687,7 @@ class printerName(simple):
 	"""
 	min_length = 1
 	max_length = 16
-	_re = re.compile('(?u)(^[a-zA-Z0-9])[a-zA-Z0-9_-]*([a-zA-Z0-9]$)')
+	_re = re.compile(r'(?u)(^[a-zA-Z0-9])[a-zA-Z0-9_-]*([a-zA-Z0-9]$)')
 
 	@classmethod
 	def parse(self, text):
@@ -4777,7 +4777,7 @@ class policyName(string):
 	"""
 	Syntax to enter |UDM| policy name.
 	"""
-	_re = re.compile('^[a-zA-Z0-9]{1}[a-zA-Z0-9 #!$%&/\|\^.~_-]*?[a-zA-Z0-9#!$%&/\|\^.~_-]{1}$')
+	_re = re.compile(r'^[a-zA-Z0-9]{1}[a-zA-Z0-9 #!$%&/\|\^.~_-]*?[a-zA-Z0-9#!$%&/\|\^.~_-]{1}$')
 
 	@classmethod
 	def parse(self, text):

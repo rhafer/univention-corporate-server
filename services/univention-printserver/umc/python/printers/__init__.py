@@ -221,7 +221,7 @@ class Instance(Base):
 
 		result = []
 		(stdout, stderr, status) = self._shell_command(['/usr/bin/lpstat', '-o', printer])
-		expr = re.compile('\s*(\S+)\s+(\S+)\s+(\d+)\s*(.*?)$')
+		expr = re.compile(r'\s*(\S+)\s+(\S+)\s+(\d+)\s*(.*?)$')
 		if status == 0:
 			for line in stdout.split("\n"):
 				mobj = expr.match(line)
@@ -239,7 +239,7 @@ class Instance(Base):
 		""" returns a list of printers, along with their 'enabled' status. """
 
 		result = []
-		expr = re.compile('printer\s+(\S+)\s.*?(\S+abled)')
+		expr = re.compile(r'printer\s+(\S+)\s.*?(\S+abled)')
 		(stdout, stderr, status) = self._shell_command(['/usr/bin/lpstat', '-p'], {'LANG': 'C'})
 		if status == 0:
 			for line in stdout.split("\n"):
@@ -264,7 +264,7 @@ class Instance(Base):
 		""" returns as much as possible details about a printer. """
 
 		result = {}
-		expr = re.compile('\s+([^\s\:]+)\:\s*(.*?)$')
+		expr = re.compile(r'\s+([^\s\:]+)\:\s*(.*?)$')
 		(stdout, stderr, status) = self._shell_command(['/usr/bin/lpstat', '-l', '-p', printer], {'LANG': 'C'})
 		if status == 0:
 			for line in stdout.split("\n"):
@@ -336,7 +336,7 @@ class Instance(Base):
 		"""
 
 		result = {}
-		expr = re.compile('device for (\S+)\:\s*(\S+)$')
+		expr = re.compile(r'device for (\S+)\:\s*(\S+)$')
 		(stdout, stderr, status) = self._shell_command(['/usr/bin/lpstat', '-v'], {'LANG': 'C'})
 		if status == 0:
 			for line in stdout.split("\n"):

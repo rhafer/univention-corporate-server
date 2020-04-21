@@ -82,7 +82,7 @@ class Message(object):
 	"""
 
 	RESPONSE, REQUEST = range(0, 2)
-	_header = re.compile('(?P<type>REQUEST|RESPONSE)/(?P<id>[\d-]+)/(?P<length>\d+)(/(?P<mimetype>[a-z-/]+))?: ?(?P<command>\w+) ?(?P<arguments>[^\n]+)?', re.UNICODE)
+	_header = re.compile(r'(?P<type>REQUEST|RESPONSE)/(?P<id>[\d-]+)/(?P<length>\d+)(/(?P<mimetype>[a-z-/]+))?: ?(?P<command>\w+) ?(?P<arguments>[^\n]+)?', re.UNICODE)
 	__counter = 0
 
 	def __init__(self, type=REQUEST, command='', mime_type=MIMETYPE_JSON, data=None, arguments=None, options=None):

@@ -65,7 +65,7 @@ for opt, val in opts:
 # level
 skip = True
 levels = ['^']
-msg_pattern = re.compile('^([^ ]+) *\( ([^ ]+) +\) : (.+)$')
+msg_pattern = re.compile(r'^([^ ]+) *\( ([^ ]+) +\) : (.+)$')
 
 
 def suspended(levels):

@@ -710,7 +710,7 @@ def format_escaped(format_string, *args, **kwargs):
 
 
 class s4(univention.s4connector.ucs):
-	RANGE_RETRIEVAL_PATTERN = re.compile("^([^;]+);range=(\d+)-(\d+|\*)$")
+	RANGE_RETRIEVAL_PATTERN = re.compile(r"^([^;]+);range=(\d+)-(\d+|\*)$")
 
 	def __init__(self, CONFIGBASENAME, property, baseConfig, s4_ldap_host, s4_ldap_port, s4_ldap_base, s4_ldap_binddn, s4_ldap_bindpw, s4_ldap_certificate, listener_dir, init_group_cache=True):
 		univention.s4connector.ucs.__init__(self, CONFIGBASENAME, property, baseConfig, listener_dir)

@@ -270,7 +270,7 @@ class Base(signals.Provider, Translation):
 		if request.headers.get('X-Requested-With'.title(), '').lower() != 'XMLHTTPRequest'.lower():
 			return  # don't change the language if Accept-Language header contains the value of the browser and not those we set in Javascript
 
-		accepted_locales = re.split('\s*,\s*', request.headers.get('Accept-Language', ''))
+		accepted_locales = re.split(r'\s*,\s*', request.headers.get('Accept-Language', ''))
 		if accepted_locales:
 			self.update_language(l.replace('-', '_') for l in accepted_locales)
 
@@ -289,7 +289,7 @@ class Base(signals.Provider, Translation):
 		content_type = request.headers.get('Content-Type', '')
 		allowed_content_types = ('application/json', 'application/x-www-form-urlencoded', 'multipart/form-data')
 
-		if content_type and not re.match('^(%s)($|\s*;)' % '|'.join(re.escape(x) for x in allowed_content_types), content_type):
+		if content_type and not re.match(r'^(%s)($|\s*;)' % '|'.join(re.escape(x) for x in allowed_content_types), content_type):
 			raise UMC_Error(self._('The requested Content-Type is not acceptable. Please use one of %s.' % (', '.join(allowed_content_types))), status=406)
 
 	def thread_finished_callback(self, thread, result, request):

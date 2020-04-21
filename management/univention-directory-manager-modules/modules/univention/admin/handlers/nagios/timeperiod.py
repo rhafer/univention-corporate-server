@@ -57,7 +57,7 @@ operations = ['search', 'edit', 'add', 'remove']
 
 class syntax_timeperiod(univention.admin.syntax.simple):
 	name = 'timeperiod'
-	_re = re.compile('^([0-9][0-9]\:[0-9][0-9]-[0-9][0-9]\:[0-9][0-9](,[0-9][0-9]\:[0-9][0-9]-[0-9][0-9]\:[0-9][0-9])*)?$')
+	_re = re.compile(r'^([0-9][0-9]:[0-9][0-9]-[0-9][0-9]:[0-9][0-9](,[0-9][0-9]:[0-9][0-9]-[0-9][0-9]:[0-9][0-9])*)?$')
 
 	@classmethod
 	def parse(self, text):

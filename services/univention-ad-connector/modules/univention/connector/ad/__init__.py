@@ -823,7 +823,7 @@ class Simple_AD_Connection():
 
 class ad(univention.connector.ucs):
 
-	range_retrieval_pattern = re.compile("^([^;]+);range=(\d+)-(\d+|\*)$")
+	range_retrieval_pattern = re.compile(r"^([^;]+);range=(\d+)-(\d+|\*)$")
 
 	def __init__(self, CONFIGBASENAME, property, baseConfig, ad_ldap_host, ad_ldap_port, ad_ldap_base, ad_ldap_binddn, ad_ldap_bindpw, ad_ldap_certificate, listener_dir, init_group_cache=True):
 
@@ -995,7 +995,7 @@ class ad(univention.connector.ucs):
 		creds.set_username(self.ad_ldap_bind_username)
 		creds.set_password(self.lo_ad.bindpw)
 
-		binding_options = "\pipe\samr"
+		binding_options = r"\pipe\samr"
 		binding = "ncacn_np:%s[%s]" % (self.ad_ldap_host, binding_options)
 
 		self.samr = samba.dcerpc.samr.samr(binding, lp, creds)

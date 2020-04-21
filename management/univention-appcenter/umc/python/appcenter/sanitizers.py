@@ -124,7 +124,7 @@ advanced_components_sanitizer = DictSanitizer({
 	'prefix': StringSanitizer(),
 	'unmaintained': BooleanSanitizer(),
 	'enabled': BooleanSanitizer(required=True),
-	'name': StringSanitizer(required=True, regex_pattern='^[A-Za-z0-9\-\_\.]+$'),
+	'name': StringSanitizer(required=True, regex_pattern=r'^[A-Za-z0-9\-\_\.]+$'),
 	'description': StringSanitizer(),
 	'username': StringSanitizer(),
 	'password': StringSanitizer(),
@@ -134,6 +134,6 @@ advanced_components_sanitizer = DictSanitizer({
 
 
 add_components_sanitizer = advanced_components_sanitizer + DictSanitizer({
-	'name': NoDoubleNameSanitizer(required=True, regex_pattern='^[A-Za-z0-9\-\_\.]+$'),
+	'name': NoDoubleNameSanitizer(required=True, regex_pattern=r'^[A-Za-z0-9\-\_\.]+$'),
 }
 )

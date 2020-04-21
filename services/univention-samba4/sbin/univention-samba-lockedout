@@ -36,9 +36,9 @@ import argparse
 import subprocess
 
 _LDBSEARCH_PATTERNS = {
-	"dn": re.compile("dn: (.*)"),
-	"name": re.compile("sAMAccountName: (.*)"),
-	"lockout": re.compile("lockoutTime: (\d+)")
+	"dn": re.compile(r"dn: (.*)"),
+	"name": re.compile(r"sAMAccountName: (.*)"),
+	"lockout": re.compile(r"lockoutTime: (\d+)")
 }
 
 _NT_UNIX_DELTA = (datetime.datetime(1970, 1, 1) -
@@ -107,7 +107,7 @@ def get_lockout_duration():
 	except (OSError, subprocess.CalledProcessError) as error:
 		exit("Error calling samba-tool: " + str(error))
 
-	matches = re.findall("^Account lockout duration \(mins\): (\d+)$",
+	matches = re.findall(r"^Account lockout duration \(mins\): (\d+)$",
 		output, re.MULTILINE)
 
 	try:

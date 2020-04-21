@@ -241,7 +241,7 @@ class object(univention.admin.handlers.simpleLdap):
 				for key, value in self.OPTION_BITS.iteritems():
 					self[key] = '1' if value in options else '0'
 
-		_re = re.compile('^([^.]+)\.(.+?)$')
+		_re = re.compile(r'^([^.]+)\.(.+?)$')
 
 		# convert host FQDN to host DN
 		hostlist = []

@@ -103,7 +103,7 @@ def repquota_parse(partition, output):
 	if not output:
 		return result
 
-	regex = re.compile('(?P<user>[^ ]*) *[-+]+ *(?P<bused>[0-9]*) *(?P<bsoft>[0-9]*) *(?P<bhard>[0-9]*) *((?P<btime>([0-9]*days|none|[0-9]{2}:[0-9]{2})))? *(?P<fused>[0-9]*) *(?P<fsoft>[0-9]*) *(?P<fhard>[0-9]*) *((?P<ftime>([0-9]*days|none|[0-9]{2}:[0-9]{2})))?')
+	regex = re.compile(r'(?P<user>[^ ]*) *[-+]+ *(?P<bused>[0-9]*) *(?P<bsoft>[0-9]*) *(?P<bhard>[0-9]*) *((?P<btime>([0-9]*days|none|[0-9]{2}:[0-9]{2})))? *(?P<fused>[0-9]*) *(?P<fsoft>[0-9]*) *(?P<fhard>[0-9]*) *((?P<ftime>([0-9]*days|none|[0-9]{2}:[0-9]{2})))?')
 	for line in output:
 		matches = regex.match(line)
 		if not matches:
@@ -153,7 +153,7 @@ def quota_is_enabled(fstab_entry):
 		return False
 	else:
 		# match lines like "quota on / (/dev/disk/by-uuid/5bf2a723-b25a) is on"
-		pattern = re.compile("user quota on %s \([^)]*\) is (on|off)" % fstab_entry.mount_point)
+		pattern = re.compile(r"user quota on %s \([^)]*\) is (on|off)" % fstab_entry.mount_point)
 		match = pattern.match(stdout)
 		if match:
 			if match.group(1) == "on":
@@ -315,7 +315,7 @@ def _activate_quota_ext(fstab_entry, activate=True):
 
 
 _units = ('B', 'KB', 'MB', 'GB', 'TB')
-_size_regex = re.compile('(?P<size>[0-9.]+)(?P<unit>(B|KB|MB|GB|TB))?')
+_size_regex = re.compile(r'(?P<size>[0-9.]+)(?P<unit>(B|KB|MB|GB|TB))?')
 
 
 def block2byte(size, convertTo, block_size=1024):

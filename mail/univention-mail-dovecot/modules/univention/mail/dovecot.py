@@ -179,7 +179,7 @@ class DovecotListener(object):
 
 	def get_maillocation(self):
 		try:
-			return self.read_from_ext_proc_as_root(["/usr/bin/doveconf", "-h", "mail_location"], "\S+:(\S+)/Maildir")
+			return self.read_from_ext_proc_as_root(["/usr/bin/doveconf", "-h", "mail_location"], r"\S+:(\S+)/Maildir")
 		except:
 			self.log_e("Failed to get mail_location from Dovecot configuration.\n%s" % traceback.format_exc())
 			raise
@@ -216,7 +216,7 @@ class DovecotListener(object):
 	def get_masteruser_credentials(self):
 		try:
 			self.listener.setuid(0)
-			return re.findall("(\S+):{PLAIN}(\S+)::::::", open("/etc/dovecot/master-users").read())[0]
+			return re.findall(r"(\S+):{PLAIN}(\S+)::::::", open("/etc/dovecot/master-users").read())[0]
 		except:
 			self.log_e("Failed to get masteruser password.\n%s" % traceback.format_exc())
 			raise

@@ -41,7 +41,7 @@ class UCS_Version(object):
 	FORMAT = '%(major)d.%(minor)d'
 	FULLFORMAT = '%(major)d.%(minor)d-%(patchlevel)d'
 	# regular expression matching a UCS version X.Y-Z
-	_regexp = re.compile('(?P<major>[0-9]+)\.(?P<minor>[0-9]+)-(?P<patch>[0-9]+)')
+	_regexp = re.compile(r'(?P<major>[0-9]+)\.(?P<minor>[0-9]+)-(?P<patch>[0-9]+)')
 
 	def __init__(self, version):
 		# type: (Union[Tuple[int, int, int], List[int], str, UCS_Version]) -> None

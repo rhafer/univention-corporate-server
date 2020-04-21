@@ -186,7 +186,7 @@ class ShareConfiguration(object):
 
 		# read CUPS configuration
 		if os.path.isfile(ShareConfiguration.CUPS_CONF):
-			reg_cups = re.compile('\s*<Printer\s+([^>]+)>')
+			reg_cups = re.compile(r'\s*<Printer\s+([^>]+)>')
 
 			fd = open("/etc/cups/printers.conf")
 			try:
@@ -311,14 +311,14 @@ class ShareConfiguration(object):
 	# parse ucr
 	def read_ucr(self):
 		_map = dict(
-			options=(re.compile('samba/share/([^\/]+)/options/(.*)'), self._set_options),
-			globals=(re.compile('samba/global/options/(.*)'), self._set_globals),
-			hosts=(re.compile('samba/share/([^\/]+)/hosts/deny'), self._set_denied_hosts),
-			users=(re.compile('samba/share/([^\/]+)/usergroup/([^\/]+)/invalid'), self._set_invalids),
-			printmode_groups=(re.compile('samba/printmode/usergroup/(.*)'), self._set_printmode_group),
-			printmode_hosts=(re.compile('samba/printmode/hosts/(.*)'), self._set_printmode_hosts),
-			othershares=(re.compile('samba/othershares/usergroup/([^\/]+)/invalid'), self._set_othershares),
-			othershares_hosts=(re.compile('samba/othershares/hosts/deny'), self._set_othershares_hosts)
+			options=(re.compile(r'samba/share/([^\/]+)/options/(.*)'), self._set_options),
+			globals=(re.compile(r'samba/global/options/(.*)'), self._set_globals),
+			hosts=(re.compile(r'samba/share/([^\/]+)/hosts/deny'), self._set_denied_hosts),
+			users=(re.compile(r'samba/share/([^\/]+)/usergroup/([^\/]+)/invalid'), self._set_invalids),
+			printmode_groups=(re.compile(r'samba/printmode/usergroup/(.*)'), self._set_printmode_group),
+			printmode_hosts=(re.compile(r'samba/printmode/hosts/(.*)'), self._set_printmode_hosts),
+			othershares=(re.compile(r'samba/othershares/usergroup/([^\/]+)/invalid'), self._set_othershares),
+			othershares_hosts=(re.compile(r'samba/othershares/hosts/deny'), self._set_othershares_hosts),
 		)
 
 		for key in ucr.keys():

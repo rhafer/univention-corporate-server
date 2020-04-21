@@ -1430,7 +1430,7 @@ def add_domaincontroller_srv_record_in_ad(ad_ip, username, password, ucr=None):
 
 	cmd = ['kinit', '--password-file=/etc/machine.secret']
 	# use the machine account so that the server has permissions to modify this record
-	cmd += ['%s\$' % hostname]
+	cmd += ['%s\\$' % hostname]
 	cmd += ['nsupdate', '-v', '-g', fd.name]
 	try:
 		p1 = subprocess.Popen(cmd, close_fds=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -1449,7 +1449,7 @@ def add_domaincontroller_srv_record_in_ad(ad_ip, username, password, ucr=None):
 
 def get_ucr_variable_from_ucs(host, server, var):
 	cmd = ['univention-ssh', '/etc/machine.secret']
-	cmd += ['%s\$@%s' % (host, server)]
+	cmd += ['%s\\$@%s' % (host, server)]
 	cmd += ['/usr/sbin/ucr get %s' % (pipes.quote(var),)]
 	p1 = subprocess.Popen(cmd, close_fds=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout, stderr = p1.communicate()

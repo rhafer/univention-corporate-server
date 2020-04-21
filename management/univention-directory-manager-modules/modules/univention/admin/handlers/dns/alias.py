@@ -154,7 +154,7 @@ def identify(dn, attr, canonical=0):
 
 
 def lookup_alias_filter(lo, filter_s):
-	alias_pattern = re.compile('(?:^|\()dnsAlias=([^)]+)($|\))', flags=re.I)
+	alias_pattern = re.compile(r'(?:^|\()dnsAlias=([^)]+)($|\))', flags=re.I)
 
 	def _replace_alias_filter(match):
 		alias_filter = object.lookup_filter('name=%s' % match.group(1), lo)

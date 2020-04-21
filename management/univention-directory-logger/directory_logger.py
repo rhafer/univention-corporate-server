@@ -51,7 +51,7 @@ filter = '(objectClass=*)'  # log all objects by default
 attributes = []
 
 logname = '/var/log/univention/directory-logger.log'
-excludeKeyPattern = re.compile('ldap/logging/exclude\d+')
+excludeKeyPattern = re.compile(r'ldap/logging/exclude\d+')
 cachename = '/var/lib/univention-directory-logger/cache'
 notifier_id = '/var/lib/univention-directory-listener/notifier_id'
 

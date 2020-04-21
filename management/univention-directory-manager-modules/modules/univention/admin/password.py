@@ -46,7 +46,7 @@ except ImportError:
 configRegistry = univention.config_registry.ConfigRegistry()
 configRegistry.load()
 
-RE_PASSWORD_SCHEME = re.compile('^{(\w+)}(!?)(.*)', re.I)
+RE_PASSWORD_SCHEME = re.compile(r'^{(\w+)}(!?)(.*)', re.I)
 
 
 def crypt(password, method_id=None, salt=None):

@@ -85,7 +85,7 @@ def enableaccept(command, groupname, timeout, machine_password):
 	child = spawn(command, [groupname])
 	# print child
 	while not i == 3:
-		i = child.expect(['%s\.%s.*\?' % (baseConfig['hostname'], baseConfig['domainname']), '%s.*\?' % baseConfig['hostname'], 'localhost.*\?', EOF], timeout=timeout)
+		i = child.expect([r'%s\.%s.*\?' % (baseConfig['hostname'], baseConfig['domainname']), r'%s.*\?' % baseConfig['hostname'], r'localhost.*\?', EOF], timeout=timeout)
 		# print command, " %s" % i
 		if i in [0, 1, 2]:
 			child.sendline(machine_password)
@@ -99,7 +99,7 @@ def enableaccept(command, groupname, timeout, machine_password):
 
 
 while not i == 3:
-	i = child.expect(['%s\.%s.*\?' % (baseConfig['hostname'], baseConfig['domainname']), '%s.*\?' % baseConfig['hostname'], 'localhost.*\?', EOF], timeout=timeout)
+	i = child.expect([r'%s\.%s.*\?' % (baseConfig['hostname'], baseConfig['domainname']), r'%s.*\?' % baseConfig['hostname'], r'localhost.*\?', EOF], timeout=timeout)
 	if i in [0, 1, 2]:
 		show_child_before_message(child)
 		child.sendline(machine_password)
