@@ -1,3 +1,9 @@
+univention-saml (6.1.0-0) unstable; urgency=medium
+
+  * Bug #51157: Version bump
+
+ -- Dirk Wiesenthal <wiesenthal@univention.de>  Thu, 23 Apr 2020 13:07:13 +0200
+
 univention-saml (6.0.2-37) unstable; urgency=medium
 
   * Bug #51068: doc
