@@ -70,3 +70,30 @@ class SettingsPortalModule(GenericModule):
 	class Meta:
 		supported_api_versions = [1, 2]
 		suitable_for = ['settings/portal']
+
+
+def merged_dicts(*args):
+	ret = {}
+	for arg in args:
+		ret.update(arg)
+	return ret
+
+
+class SettingsPortalObjectPropertiesV3(GenericObjectProperties):
+	_encoders = merged_dicts(SettingsPortalObjectProperties._encoders, {
+		'links': dn_list_property_encoder_for('settings/portal_entry')
+	})
+
+
+class SettingsPortalObjectV3(GenericObject):
+	"""Better representation of settings/portal properties."""
+	udm_prop_class = SettingsPortalObjectPropertiesV3
+
+
+class SettingsPortalModuleV3(GenericModule):
+	"""SettingsPortalObject factory"""
+	_udm_object_class = SettingsPortalObjectV3
+
+	class Meta:
+		supported_api_versions = [3]
+		suitable_for = ['settings/portal']

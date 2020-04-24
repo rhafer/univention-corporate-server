@@ -1,3 +1,10 @@
+univention-directory-manager-modules (14.1.0-1) unstable; urgency=medium
+
+  * Bug #51162: New links attribute for settings/portal: DNs for
+    settings/portal_entry
+
+ -- Dirk Wiesenthal <wiesenthal@univention.de>  Fri, 24 Apr 2020 17:16:14 +0200
+
 univention-directory-manager-modules (14.1.0-0) unstable; urgency=medium
 
   * Bug #51157: Version bump
