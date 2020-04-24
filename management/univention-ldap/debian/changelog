@@ -1,3 +1,9 @@
+univention-ldap (15.1.0-0) unstable; urgency=medium
+
+  * Bug #51162: New LDAP attribute for the new links
+
+ -- Dirk Wiesenthal <wiesenthal@univention.de>  Fri, 24 Apr 2020 17:12:34 +0200
+
 univention-ldap (15.0.0-39) unstable; urgency=medium
 
   * Bug #51029: make UCR templates python3-compatible
