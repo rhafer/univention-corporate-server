@@ -15,6 +15,5 @@ var umcConfig = {
 		tools.status('password', getQuery('password'));
 		login.renderLoginDialog();
 		dialog.renderLoginDialog();
-		// login.setupIframeMessaging();
 	}
 };

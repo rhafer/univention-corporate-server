@@ -16,13 +16,5 @@ var umcConfig = {
 			var localelink = array.filter(availableLocales, function(lang) { return lang.id === locale; })[0].href;
 			window.location = localelink;
 		};
-		// login.setupIframeMessaging();
-		// window.addEventListener('message', function(evt) {
-			// if (evt.data === 'handShake') {
-				// window.onbeforeunload = function() {
-					// evt.source.postMessage('do login', 'https://master80.mydomain.intranet');
-				// };
-			// }
-		// }, false);
 	}
 };

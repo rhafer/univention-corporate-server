@@ -66,7 +66,6 @@ define([
 		_password_required: null,
 		_loginDialog: null, // internal reference to the login dialog
 		_nextLoginDeferred: null,
-		// _iframeParentHandle: null,
 
 		init: function() {
 			this._initEventHandlers();
@@ -525,26 +524,7 @@ define([
 				})
 			}]);
 			return deferred;
-		},
-
-		// setupIframeMessaging: function() {
-			// // if (!getQuery('iniframe')) {
-				// // return;
-			// // }
-
-			// this._iframeParentHandle = new Deferred();
-			// window.addEventListener('message', lang.hitch(this, function(evt) {
-				// // TODO check evt.origin
-				// if (evt.data === 'handShake') {
-					// this._iframeParentHandle.resolve(evt.source);
-				// }
-			// }), false);
-			// topic.subscribe('/umc/authenticated', lang.hitch(this, function(username) {
-				// this._iframeParentHandle.then(function(parent) {
-					// parent.postMessage(username);
-				// });
-			// }));
-		// }
+		}
 	};
 
 	login.init();
