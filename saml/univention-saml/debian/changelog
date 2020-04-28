@@ -1,3 +1,9 @@
+univention-saml (6.1.1-2) unstable; urgency=medium
+
+  * Bug #51162: make Content-Security-Policy configurable
+
+ -- Florian Best <best@univention.de>  Tue, 28 Apr 2020 17:10:05 +0200
+
 univention-saml (6.1.0-0) unstable; urgency=medium
 
   * Bug #51157: Version bump
