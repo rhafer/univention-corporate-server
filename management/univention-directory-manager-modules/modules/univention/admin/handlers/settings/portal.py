@@ -31,6 +31,7 @@
 # <https://www.gnu.org/licenses/>.
 
 import json
+import re
 from ldap.filter import filter_format
 
 from univention.admin.layout import Tab, Group
@@ -232,6 +233,17 @@ def unmapContent(vals):
 	return json.loads(vals[0])
 
 
+def mapOrdered(ldap_values):
+	# ldap stores multi value fields unordered by default
+	# you can change this by putting X-ORDERED 'VALUES' in your schema file
+	# but then you literally get ['{0}foo', '{1}bar']
+	return ['{{{}}}{}'.format(i, value) for i, value in enumerate(ldap_values)]
+
+
+def unmapOrdered(udm_values):
+	return [re.sub('^{\d+}', '', value) for value in udm_values]
+
+
 mapping = univention.admin.mapping.mapping()
 mapping.register('name', 'cn', None, univention.admin.mapping.ListToString)
 mapping.register('displayName', 'univentionPortalDisplayName', mapTranslationValue, unmapTranslationValue)
@@ -248,7 +260,7 @@ mapping.register('cssBackground', 'univentionPortalCSSBackground', None, univent
 mapping.register('fontColor', 'univentionPortalFontColor', None, univention.admin.mapping.ListToString)
 mapping.register('logo', 'univentionPortalLogo', None, univention.admin.mapping.ListToString)
 mapping.register('portalEntriesOrder', 'univentionPortalEntriesOrder')
-mapping.register('links', 'univentionPortalLinks2')
+mapping.register('links', 'univentionPortalLinks2', mapOrdered, unmapOrdered)
 mapping.register('content', 'univentionPortalContent', mapContent, unmapContent)
 mapping.register('defaultLinkTarget', 'univentionPortalDefaultLinkTarget', None, univention.admin.mapping.ListToString)
 

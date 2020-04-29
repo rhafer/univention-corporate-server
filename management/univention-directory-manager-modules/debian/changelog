@@ -1,3 +1,9 @@
+univention-directory-manager-modules (14.1.0-3) unstable; urgency=medium
+
+  * Bug #51162: Ordered links
+
+ -- Dirk Wiesenthal <wiesenthal@univention.de>  Wed, 29 Apr 2020 10:58:06 +0200
+
 univention-directory-manager-modules (14.1.0-2) unstable; urgency=medium
 
   * Bug #51184: Fix UDM encoders for DNs
