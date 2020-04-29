@@ -131,6 +131,7 @@ attributetype ( univentionPortalAttributeType:18 NAME 'univentionPortalLinks2'
 	DESC 'Portal links as entries'
 	EQUALITY caseIgnoreMatch
 	SUBSTR caseIgnoreSubstringsMatch
+	X-ORDERED 'VALUES'
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
 
 objectclass ( univentionPortalObjectClass:1 NAME 'univentionPortal'

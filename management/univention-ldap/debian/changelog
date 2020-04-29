@@ -1,3 +1,9 @@
+univention-ldap (15.1.0-1) unstable; urgency=medium
+
+  * Bug #51162: New LDAP attribute for the new links shall be ordered
+
+ -- Dirk Wiesenthal <wiesenthal@univention.de>  Wed, 29 Apr 2020 10:59:52 +0200
+
 univention-ldap (15.1.0-0) unstable; urgency=medium
 
   * Bug #51162: New LDAP attribute for the new links
