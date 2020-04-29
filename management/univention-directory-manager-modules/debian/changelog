@@ -1,3 +1,9 @@
+univention-directory-manager-modules (14.1.0-2) unstable; urgency=medium
+
+  * Bug #51184: Fix UDM encoders for DNs
+
+ -- Dirk Wiesenthal <wiesenthal@univention.de>  Wed, 29 Apr 2020 10:53:08 +0200
+
 univention-directory-manager-modules (14.1.0-1) unstable; urgency=medium
 
   * Bug #51162: New links attribute for settings/portal: DNs for
