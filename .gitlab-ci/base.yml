@@ -15,6 +15,33 @@ variables:
   DEB: docker-registry.knut.univention.de/phahn/ucs-devbase:$ucs
   DOC: docker-registry.knut.univention.de/docbook
   LINT: docker-registry.knut.univention.de/ucslint:$ucs
+  APTLY: http://omar.knut.univention.de:11620/api
+  APT: http://omar.knut.univention.de/build2/git
+
+prepare aptly:
+  stage: prepare
+  image: curlimages/curl
+  script:
+    - "$CI_PROJECT_DIR/.gitlab-ci/aptly-create || :"
+    - $CI_PROJECT_DIR/.gitlab-ci/aptly-publish
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    url: $APT/dists/$CI_COMMIT_REF_SLUG/
+    on_stop: drop aptly
+    auto_stop_in: 6 month
+
+drop aptly:
+  stage: prepare
+  variables:
+    GIT_STRATEGY: none
+  image: curlimages/curl
+  script:
+    - "curl --silent --show-error -X DELETE $APTLY/publish//$CI_COMMIT_REF_SLUG || :"
+    - "curl --silent --show-error -X DELETE $APTLY/repos/$CI_COMMIT_REF_SLUG || :"
+  when: manual
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    action: stop
 
 .lint:
   stage: lint
@@ -26,14 +53,15 @@ variables:
   stage: build
   image: $DEB
   before_script:
+    - echo "deb [trusted=yes] $APT $CI_COMMIT_REF_SLUG main" >"/etc/apt/sources.list.d/$CI_COMMIT_REF_SLUG.list"
     - apt-get -qq update
     - cd $base
     - apt-get -qq build-dep .
   script:
     - dpkg-buildpackage -uc -us -b --jobs-try=auto
-  artifacts:
-    paths:
-      - "*/*.deb"
+  after_script:
+    - apt-get -qq --no-install-recommends install curl
+    - .gitlab-ci/aptly-upload ${base}_*.changes
 
 .doc:
   stage: build

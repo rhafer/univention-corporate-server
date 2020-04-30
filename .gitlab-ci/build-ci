@@ -52,10 +52,3 @@ do
 	# echo '  needs:'
 	# echo "    - job: ${dep}
 done
-
-# The child pipeline needs at minimum one job to run - otherwise the sub-pipeline fails
-echo
-echo 'dummy:'
-echo '  stage: .post'
-echo '  script:'
-echo '    - ":"'
