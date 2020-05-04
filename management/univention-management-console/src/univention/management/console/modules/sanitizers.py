@@ -113,7 +113,7 @@ class MultiValidationError(ValidationError):
 	def number_of_errors(self):
 		'''Cumulative number of errors found'''
 		num = 0
-		for k, v in self.validation_errors.iteritems():
+		for k, v in self.validation_errors.items():
 			num += v.number_of_errors()
 		return num
 
@@ -127,7 +127,7 @@ class MultiValidationError(ValidationError):
 	def result(self):
 		'''Returns a errors in a similar way like the arguments were passed
 		to the sanitizers.'''
-		return dict([(name, e.result()) for name, e in self.validation_errors.iteritems()])
+		return dict([(name, e.result()) for name, e in self.validation_errors.items()])
 
 
 class Sanitizer(object):
@@ -380,7 +380,7 @@ class IntegerSanitizer(Sanitizer):
 			value = int(value)
 			if not isinstance(value, int):
 				# value is of type 'long'
-				raise ValueError
+				raise ValueError()
 		except (ValueError, TypeError):
 			self.raise_validation_error(_('Cannot be converted to a number'))
 		else:
@@ -666,9 +666,9 @@ class MappingSanitizer(ChoicesSanitizer):
 			# sort allowed values to have reproducible error messages
 			# sorted works with every base data type, even inter-data type!
 			choices = sorted(mapping.keys())
-		except:
+		except Exception:
 			# but who knows...
-			choices = mapping.keys()
+			choices = list(mapping.keys())
 		super(MappingSanitizer, self).__init__(choices, **kwargs)
 		self.mapping = mapping
 

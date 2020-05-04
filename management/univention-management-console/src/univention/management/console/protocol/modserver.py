@@ -86,7 +86,7 @@ class ModuleServer(Server):
 		self.__active_requests = 0
 		self._timer()
 		self.__check_acls = check_acls
-		self.__queue = ''
+		self.__queue = b''
 		self.__username = None
 		self.__user_dn = None
 		self.__password = None
@@ -193,7 +193,7 @@ class ModuleServer(Server):
 		while self.__buffer:
 			try:
 				msg = Message()
-				self.__buffer = msg.parse(self.__buffer.decode('UTF-8'))  #PY3# FIXME
+				self.__buffer = msg.parse(self.__buffer)
 				MODULE.info("Received request %s" % msg.id)
 				self.handle(msg)
 			except IncompleteMessageError:
@@ -352,7 +352,7 @@ class ModuleServer(Server):
 		if len(self.__queue) > 0:
 			length = len(self.__queue)
 			try:
-				ret = self.__comm.send(self.__queue.encode('UTF-8'))  #PY3# FIXME
+				ret = self.__comm.send(self.__queue)
 			except socket.error as e:
 				if e[0] == errno.EWOULDBLOCK:
 					return True
@@ -364,7 +364,7 @@ class ModuleServer(Server):
 				self.__queue = self.__queue[ret:]
 				return True
 			else:
-				self.__queue = ''
+				self.__queue = b''
 				return False
 		else:
 			return False
@@ -372,7 +372,7 @@ class ModuleServer(Server):
 	def response(self, msg):
 		"""Sends an UMCP response to the client"""
 		PROTOCOL.info('Sending UMCP RESPONSE %s' % msg.id)
-		self.__queue += str(msg)
+		self.__queue += bytes(msg)
 
 		if self._do_send(self.__comm):
 			notifier.socket_add(self.__comm, self._do_send, notifier.IO_WRITE)

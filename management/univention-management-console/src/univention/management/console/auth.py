@@ -135,7 +135,7 @@ class AuthHandler(signals.Provider):
 				attr = 'mailPrimaryAddress' if '@' in username else 'uid'
 				result = lo.search(filter_format('(&(%s=%s)(objectClass=person))', (attr, username)), attr=['uid'], unique=True)
 			if result and result[0][1].get('uid'):
-				username = result[0][1]['uid'][0]
+				username = result[0][1]['uid'][0].decode('utf-8')
 				AUTH.info('Canonicalized username: %r' % (username,))
 		except (ldap.LDAPError, udm_errors.ldapError) as exc:
 			# /etc/machine.secret missing or LDAP server not reachable

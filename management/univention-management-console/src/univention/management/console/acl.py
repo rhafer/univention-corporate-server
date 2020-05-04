@@ -72,6 +72,7 @@ import operator
 import traceback
 from fnmatch import fnmatch
 from ldap.filter import filter_format
+import six
 
 from .config import ucr
 from .log import ACL
@@ -140,7 +141,7 @@ class ACLs(object):
 		if acls is None:
 			self.acls = []
 		else:
-			self.acls = map(lambda x: Rule(x), acls)
+			self.acls = [Rule(x) for x in acls]
 
 	def _expand_hostlist(self, hostlist):
 		hosts = []
@@ -217,7 +218,7 @@ class ACLs(object):
 			if key not in opts:
 				continue
 
-			if isinstance(opts[key], basestring):
+			if isinstance(opts[key], six.string_types):
 				options = (opts[key], )
 			else:
 				options = opts[key]
@@ -337,7 +338,7 @@ class ACLs(object):
 		return self.acls
 
 
-class LDAP_ACLs (ACLs):
+class LDAP_ACLs(ACLs):
 
 	"""Reads ACLs from LDAP directory for the given username. By
 	inheriting the class :class:`ACLs` the ACL definitions can be cached

@@ -44,6 +44,8 @@ import re
 import copy
 import json
 
+import six
+
 from .definitions import UMCP_ERR_UNPARSABLE_BODY, UMCP_ERR_UNPARSABLE_HEADER
 from univention.management.console.log import PARSER, PROTOCOL
 
@@ -125,15 +127,19 @@ class Message(object):
 		args = b''
 		if arguments:
 			args = b' '.join(x.encode('utf-8') if hasattr(bytes, 'encode') else bytes(x, 'utf-8') for x in arguments)
-		return b'%s/%s/%d/%s: %s %s\n%s' % (type, _id, len(data), mimetype.encode('utf-8'), (command or u'NONE').encode('utf-8'), args, data)
+		return b'%s/%s/%d/%s: %s %s\n%s' % (type, _id.encode('utf-8'), len(data), mimetype.encode('utf-8'), (command or u'NONE').encode('utf-8'), args, data)
 
-	def __str__(self):
+	def __bytes__(self):
 		'''Returns the formatted message'''
 		return Message._formattedMessage(self._id, self._type, self.mimetype, self.command, self.body, self.arguments)
 
+	if six.PY2:
+		def __str__(self):
+			return self.__bytes__()
+
 	def _create_id(self):
 		# cut off 'L' for long
-		self._id = b'%lu-%d' % (long(time.time() * 100000), Message.__counter)
+		self._id = u'%lu-%d' % (int(time.time() * 100000), Message.__counter)
 		Message.__counter += 1
 
 	def recreate_id(self):
@@ -317,7 +323,7 @@ class Response(Message):
 			# FIXME: should check size first
 			self.body = fd.read()
 
-	def __str__(self):
+	def __bytes__(self):
 		'''Returns the formatted message without request options'''
 		body = copy.copy(self.body)
 		if isinstance(body, dict) and 'options' in body:

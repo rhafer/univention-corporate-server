@@ -334,7 +334,7 @@ class PamAuth(object):
 		if prompt in self.known_errors:
 			return self._(self.known_errors[prompt])
 		for pattern, error_message in self.known_errors.items():
-			if isinstance(pattern, basestring):
+			if isinstance(pattern, str):
 				pattern = re.compile(re.escape(pattern), re.I)
 			match = pattern.search(prompt)
 			if match:
