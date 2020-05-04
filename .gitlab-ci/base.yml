@@ -60,7 +60,7 @@ drop aptly:
   script:
     - dpkg-buildpackage -uc -us -b --jobs-try=auto
   after_script:
-    - apt-get -qq --no-install-recommends install curl
+    - apt-get -qq --no-install-recommends install curl || ( cat /etc/resolv.conf ; getent hosts updates.software-univention.de ; ping -c 3 updates.software-univention.de ; false )
     - .gitlab-ci/aptly-upload ${base}_*.changes
 
 .doc:
