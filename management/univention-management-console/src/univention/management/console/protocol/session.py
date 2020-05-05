@@ -716,7 +716,7 @@ class ProcessorBase(Base):
 
 	def __del__(self):
 		CORE.process('Processor: dying')
-		for process in self.__processes.keys():
+		for process in list(self.__processes.keys()):
 			self.__processes.pop(process).__del__()
 
 
