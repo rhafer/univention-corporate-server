@@ -223,14 +223,14 @@ class PamAuth(object):
 			self.pam.acct_mgmt()
 		except PAMError as pam_err:
 			AUTH.error("PAM: authentication error: %s" % (pam_err,))
-			if pam_err[1] == PAM_NEW_AUTHTOK_REQD:  # error: ('Authentication token is no longer valid; new one required', 12)
-				raise PasswordExpired(self.error_message(pam_err))
-			if pam_err[1] == PAM_ACCT_EXPIRED:  # error: ('User account has expired', 13)
-				raise AccountExpired(self.error_message(pam_err))
+			if pam_err.args[1] == PAM_NEW_AUTHTOK_REQD:  # error: ('Authentication token is no longer valid; new one required', 12)
+				raise PasswordExpired(self.error_message(pam_err.args))
+			if pam_err.args[1] == PAM_ACCT_EXPIRED:  # error: ('User account has expired', 13)
+				raise AccountExpired(self.error_message(pam_err.args))
 			if missing:
 				message = self._('Please insert your one time password (OTP).')
 				raise AuthenticationInformationMissing(message, missing)
-			raise AuthenticationFailed(self.error_message(pam_err))
+			raise AuthenticationFailed(self.error_message(pam_err.args))
 
 	def change_password(self, username, old_password, new_password):
 		answers = {
@@ -252,7 +252,7 @@ class PamAuth(object):
 			self.pam.chauthtok()
 		except PAMError as pam_err:
 			AUTH.warn('Changing password failed (%s). Prompts: %r' % (pam_err, prompts))
-			message = self._parse_error_message_from(pam_err, prompts)
+			message = self._parse_error_message_from(pam_err.args, prompts)
 			raise PasswordChangeFailed('%s %s' % (self._('Changing password failed.'), message))
 
 	def init(self):
