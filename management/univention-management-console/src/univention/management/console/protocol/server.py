@@ -100,7 +100,7 @@ class MagicBucket(object):
 	def exit(self):
 		'''Closes all open connections.'''
 		# remove all sockets
-		for sock in self.__states.keys():
+		for sock in self.__states.keys()[:]:
 			CORE.info('Shutting down connection %s' % sock)
 			self.__states.pop(sock).session.shutdown()
 			notifier.socket_remove(sock)
