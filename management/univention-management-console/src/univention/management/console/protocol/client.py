@@ -194,7 +194,7 @@ class Client(signals.Provider, Translation):
 
 	def _resend(self, sock):
 		while self.__resend_queue.get(sock):
-			data = str(self.__resend_queue[sock][0])
+			data = bytes(self.__resend_queue[sock][0])
 			try:
 				bytessent = sock.send(data)
 				if bytessent < len(data):
