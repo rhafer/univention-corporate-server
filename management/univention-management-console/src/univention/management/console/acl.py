@@ -400,6 +400,6 @@ class LDAP_ACLs(ACLs):
 
 		result = []
 		for k, g in itertools.groupby(self.acls, getvals):
-			result.append(g.next())
+			result.append(next(g))
 
 		self.acls[:] = result
