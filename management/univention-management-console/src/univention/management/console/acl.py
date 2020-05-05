@@ -149,6 +149,7 @@ class ACLs(object):
 			self.__ldap_base = ucr.get('ldap/base', None)
 
 		for host in hostlist:
+			host = host.decode('utf-8')
 			if host.startswith('systemrole:'):
 				role = host[len('systemrole:'):]
 				if role.lower() == ucr.get('server/role').lower():
@@ -183,11 +184,11 @@ class ACLs(object):
 		return command, options
 
 	def _append(self, fromUser, ldap_object):
-		for host in self._expand_hostlist(ldap_object.get('umcOperationSetHost', ['*'])):
-			flavor = ldap_object.get('umcOperationSetFlavor', ['*'])
-			for command in ldap_object.get('umcOperationSetCommand', ''):
-				command, options = self.__parse_command(command)
-				new_rule = Rule({'fromUser': fromUser, 'host': host, 'command': command, 'options': options, 'flavor': flavor[0]})
+		for host in self._expand_hostlist(ldap_object.get('umcOperationSetHost', [b'*'])):
+			flavor = ldap_object.get('umcOperationSetFlavor', [b'*'])
+			for command in ldap_object.get('umcOperationSetCommand', b''):
+				command, options = self.__parse_command(command.decode('utf-8'))
+				new_rule = Rule({'fromUser': fromUser, 'host': host, 'command': command, 'options': options, 'flavor': flavor[0].decode('utf-8')})
 				self.acls.append(new_rule)
 
 	def __compare_rules(self, rule1, rule2):
