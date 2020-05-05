@@ -80,6 +80,9 @@ class AuthenticationResult(object):
 	def __nonzero__(self):
 		return self.authenticated
 
+	def __bool__(self):
+		return self.__nonzero__()
+
 
 class AuthHandler(signals.Provider):
 
