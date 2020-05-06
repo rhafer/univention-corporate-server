@@ -894,7 +894,7 @@ class Processor(ProcessorBase):
 				new_preferences.append((key, value))
 			else:
 				new_preferences.append((key, json.dumps(value)))
-		new_preferences = ['%s=%s' % (key.encode('utf-8'), value.encode('utf-8')) for key, value in new_preferences]
+		new_preferences = [b'%s=%s' % (key.encode('utf-8'), value.encode('utf-8')) for key, value in new_preferences]
 
 		lo.modify(self._user_dn, [['univentionUMCProperty', old_preferences, new_preferences], ['objectClass', user.get('objectClass', []), object_classes]])
 
