@@ -431,8 +431,8 @@ class ProcessorBase(Base):
 				raise BadRequest('filesize is too large, maximum allowed filesize is %d' % (max_size,))
 
 			if direct_response:
-				with open(tmpfilename) as buf:
-					b64buf = base64.b64encode(buf.read())
+				with open(tmpfilename, 'rb') as buf:
+					b64buf = base64.b64encode(buf.read()).decode('ASCII')
 				result.append({'filename': filename, 'name': name, 'content': b64buf})
 
 		if direct_response:
