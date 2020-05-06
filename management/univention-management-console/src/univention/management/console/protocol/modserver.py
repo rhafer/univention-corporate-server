@@ -214,7 +214,6 @@ class ModuleServer(Server):
 		return True
 
 	def error_handling(self, request, method, etype, exc, etraceback):
-		#PY3# <https://portingguide.readthedocs.io/en/latest/exceptions.html#removed-sys-exc-type-sys-exc-value-sys-exc-traceback>
 		if self.__handler:
 			self.__handler._Base__requests[request.id] = (request, method)
 			self.__handler._Base__error_handling(request, method, etype, exc, etraceback)
